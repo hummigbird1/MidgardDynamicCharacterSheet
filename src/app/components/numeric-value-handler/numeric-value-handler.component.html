@@ -1,0 +1,9 @@
+<label>{{ label }}
+    <input type="number" [(ngModel)]="currentValue" [max]='maxValue' [min]='minValue'/>
+</label>
+
+<span class="buttonContainer">
+    <button (click)="countDown()">-</button>
+    <button (click)="countUp()">+</button>
+    <button *ngIf='showReset' (click)="resetValue()">Reset</button>
+</span>

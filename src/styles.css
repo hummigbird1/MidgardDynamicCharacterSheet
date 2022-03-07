@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    font-family: "Consolas", "Comic Sans MS", "Algerian", "Brush Script MT";
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-tab-label, .mat-tab-link {
+  color: rgb(0, 0, 0);
+}
+
