@@ -1,6 +1,7 @@
 name: Build and deploy as Github Pages
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'dev'
