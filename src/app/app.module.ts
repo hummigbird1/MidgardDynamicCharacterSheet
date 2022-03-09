@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { NumericValueHandlerComponent } from './components/numeric-value-handler/numeric-value-handler.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMaterialModule } from './ng-material/ng-material.module';
+import { AdventureSheetComponent } from './components/adventure-sheet/adventure-sheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NumericValueHandlerComponent
+    NumericValueHandlerComponent,
+    AdventureSheetComponent
   ],
   imports: [
     BrowserModule,
