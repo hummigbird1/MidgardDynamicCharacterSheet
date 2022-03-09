@@ -1,6 +1,6 @@
 <div class="container">
     <div class="CoinsArea">
-        Münzen
+        <h2>Münzen</h2>
         <app-numeric-value-handler label="Gold" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
         </app-numeric-value-handler>
         <app-numeric-value-handler label="Silber" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
@@ -9,7 +9,7 @@
         </app-numeric-value-handler>
     </div>
     <div class="JewelArea">
-        Edelsteine
+        <h2>Edelsteine</h2>
         <app-numeric-value-handler label="50er" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
         </app-numeric-value-handler>
         <app-numeric-value-handler label="100er" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
@@ -20,53 +20,49 @@
     <div class="EquipmentAndPotionsArea">
         <div class="PotionsArea">
             <div class="HealingPotionsArea">
-                Heiltränke
-                <app-numeric-value-handler label="1w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                </app-numeric-value-handler>
-                <app-numeric-value-handler label="2w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                </app-numeric-value-handler>
-                <app-numeric-value-handler label="3w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                </app-numeric-value-handler>
+                <h2>Heiltränke</h2>
+                <app-numeric-value-handler label="1w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+                <app-numeric-value-handler label="2w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+                <app-numeric-value-handler label="3w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
             </div>
             <div class="PowerPotionsArea">
-                Krafttränke
-                <app-numeric-value-handler label="1w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                </app-numeric-value-handler>
-                <app-numeric-value-handler label="2w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                </app-numeric-value-handler>
-
+                <h2>Krafttränke</h2>
+                <app-numeric-value-handler label="1w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+                <app-numeric-value-handler label="2w6" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
             </div>
         </div>
         <div class="EquipmentArea">
-            Ausrüstung
+            <h2>Ausrüstung</h2>
             <textarea class="equipment-content"></textarea>
         </div>
     </div>
     <div class="MaterialArea">
-        Verbrauchsmaterial
+        <h2>Verbrauchsmaterial</h2>
         <table class="material-table">
-
-            <tr class="material-row">
-                <th>Beschreibung</th>
-                <th>Menge</th>
-            </tr>
-            <tr class="material-row">
-                <td><input class="material-description"></td>
-                <td>
-                    <app-numeric-value-handler label="" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                    </app-numeric-value-handler>
-                </td>
-
-            </tr>
-            <tr class="material-row">
-                <td><input class="material-description"></td>
-                <td>
-                    <app-numeric-value-handler label="" [minValue]="0" [maxValue]="99999999999" [showReset]="false">
-                    </app-numeric-value-handler>
-                </td>
-
-            </tr>
-
+			<thead>
+				<tr class="material-row">
+					<th>Beschreibung</th>
+					<th>Menge</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="material-row">
+					<td>
+						<input class="material-description">
+					</td>
+					<td>
+						<app-numeric-value-handler label="" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+					</td>
+				</tr>
+				<tr class="material-row">
+					<td>
+						<input class="material-description">
+					</td>
+					<td>
+						<app-numeric-value-handler label="" [minValue]="0" [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+					</td>
+				</tr>
+			</tbody>
         </table>
     </div>
 </div>
