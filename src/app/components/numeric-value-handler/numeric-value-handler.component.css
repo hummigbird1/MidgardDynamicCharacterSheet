@@ -1,3 +1,7 @@
+.numeric-input {
+  width: 50%;
+}
+
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
