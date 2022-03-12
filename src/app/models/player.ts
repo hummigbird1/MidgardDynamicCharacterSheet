@@ -1,6 +1,8 @@
 export class Player {
     name: string = "";
-    valueables: PlayerValueables = new PlayerValueables()
+    baseStats: Stats = new Stats();
+    currentStats: Stats = new Stats();
+    valueables: PlayerValueables = new PlayerValueables();
 }
 
 class PlayerValueables {
@@ -18,4 +20,9 @@ class Jewels {
     fifties: Number = 0;
     hundreds: Number = 0;
     thousands: Number = 0;
+}
+
+class Stats {
+    hitPoints: Number = 0;
+    actionPoints: Number = 0;
 }
