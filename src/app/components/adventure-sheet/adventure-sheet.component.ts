@@ -8,7 +8,7 @@ import { Player } from 'src/app/models/player';
 })
 export class AdventureSheetComponent implements OnInit {
 
-  @Input() player: Player | undefined;
+  @Input() player!: Player;
   @Output() playerChange = new EventEmitter<Player>();
 
   constructor() { }
