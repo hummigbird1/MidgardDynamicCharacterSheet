@@ -1,5 +1,5 @@
 <label>{{ label }}
-    <input type="number" class="numeric-input" [(ngModel)]="currentValue" [max]='maxValue' [min]='minValue'/>
+    <input type="number" class="numeric-input" [(ngModel)]="currentValue" (ngModelChange)="onModelChange($event)" [max]='maxValue' [min]='minValue'/>
 </label>
 
 <span class="buttonContainer">

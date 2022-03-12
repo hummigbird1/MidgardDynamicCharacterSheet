@@ -17,6 +17,13 @@ export class NumericValueHandlerComponent implements OnInit {
 
   constructor() { }
 
+  onModelChange(event: Event): void {
+    // Unclear workaround:
+    // Without binding the ngModelEvent and emitting the currentValue ... direct edits of the input control are not registered outside of this component
+    // Question is why?  
+    this.currentValueChange.emit(this.currentValue);
+  }
+
   ngOnInit(): void {
     this.resetValue();
   }
