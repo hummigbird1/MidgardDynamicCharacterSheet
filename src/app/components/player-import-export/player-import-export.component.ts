@@ -15,7 +15,7 @@ export class PlayerImportExportComponent implements OnInit {
   }
 
   getPlayerAsJson(): string {
-    return JSON.stringify(this.playerModelProviderService.player);
+    return JSON.stringify(this.playerModelProviderService.player, null, 2);
   }
 
   importPlayer(event: Event): void {
