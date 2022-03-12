@@ -2,7 +2,7 @@
 
 <mat-tab-group>
   <mat-tab label="Abenteuer Tagesbogen">
-    <app-adventure-sheet></app-adventure-sheet>
+    <app-adventure-sheet [(player)]="player"></app-adventure-sheet>
   </mat-tab>
   <mat-tab label="UI Element Beispiel / Demo">
     <app-numeric-value-handler label='HP' baseValue="30" [minValue]="0" [maxValue]="30"></app-numeric-value-handler>
@@ -14,5 +14,8 @@
   </mat-tab>
   <mat-tab label="Zauber"> Hier könnten die Zaubersprüche stehen </mat-tab>
   <mat-tab label="Beschwörungen"> Hier könnten die Beschwörungen stehen</mat-tab>
+  <mat-tab label="Import/Export">
+    <app-player-import-export></app-player-import-export>
+  </mat-tab>
 </mat-tab-group>
 <router-outlet></router-outlet>

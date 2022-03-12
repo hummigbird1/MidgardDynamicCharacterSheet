@@ -8,21 +8,24 @@ import { NumericValueHandlerComponent } from './components/numeric-value-handler
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgMaterialModule } from './ng-material/ng-material.module';
 import { AdventureSheetComponent } from './components/adventure-sheet/adventure-sheet.component';
+import { PlayerImportExportComponent } from './components/player-import-export/player-import-export.component';
+import { PlayerModelProviderService } from './services/player-model-provider.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NumericValueHandlerComponent,
-    AdventureSheetComponent
+    AdventureSheetComponent,
+    PlayerImportExportComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BrowserAnimationsModule,
-    NgMaterialModule
+    NgMaterialModule,
   ],
-  providers: [],
+  providers: [ PlayerModelProviderService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
