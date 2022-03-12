@@ -25,16 +25,19 @@ export class NumericValueHandlerComponent implements OnInit {
   countUp() {
     if(this.currentValue < this.maxValue) {
       this.currentValue = Number(this.currentValue)+1;
+      this.currentValueChange.emit(this.currentValue);
     }
   }
 
   countDown() {
     if(this.currentValue > this.minValue) {
       this.currentValue = Number(this.currentValue)-1;
+      this.currentValueChange.emit(this.currentValue);
     }
   }
 
   resetValue() {
     this.currentValue = Number(this.baseValue);
+    this.currentValueChange.emit(this.currentValue);
   }
 }
