@@ -10,6 +10,7 @@ import { NgMaterialModule } from './ng-material/ng-material.module';
 import { AdventureSheetComponent } from './components/adventure-sheet/adventure-sheet.component';
 import { PlayerImportExportComponent } from './components/player-import-export/player-import-export.component';
 import { PlayerModelProviderService } from './services/player-model-provider.service';
+import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PlayerModelProviderService } from './services/player-model-provider.ser
     NumericValueHandlerComponent,
     AdventureSheetComponent,
     PlayerImportExportComponent,
+    CharacterSheetComponent,
   ],
   imports: [
     BrowserModule,
