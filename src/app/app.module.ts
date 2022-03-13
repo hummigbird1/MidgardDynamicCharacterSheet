@@ -11,6 +11,7 @@ import { AdventureSheetComponent } from './components/adventure-sheet/adventure-
 import { PlayerImportExportComponent } from './components/player-import-export/player-import-export.component';
 import { PlayerModelProviderService } from './services/player-model-provider.service';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
+import { PlayerLocalstorageComponent } from './components/player-localstorage/player-localstorage.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CharacterSheetComponent } from './components/character-sheet/character-
     AdventureSheetComponent,
     PlayerImportExportComponent,
     CharacterSheetComponent,
+    PlayerLocalstorageComponent,
   ],
   imports: [
     BrowserModule,
