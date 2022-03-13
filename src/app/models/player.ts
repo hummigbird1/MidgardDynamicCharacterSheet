@@ -3,6 +3,7 @@ export class Player {
     baseStats: Stats = new Stats();
     currentStats: Stats = new Stats();
     valueables: PlayerValueables = new PlayerValueables();
+    items: Item[] = [];
 }
 
 class PlayerValueables {
@@ -25,4 +26,10 @@ class Jewels {
 class Stats {
     hitPoints: Number = 0;
     actionPoints: Number = 0;
+}
+
+export class Item {
+    name: string | null = null;
+    description: string | null = null;
+    quantity: Number = 1;
 }
