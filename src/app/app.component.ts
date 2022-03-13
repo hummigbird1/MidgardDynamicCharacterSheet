@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Player } from './models/player';
+import { PlayerLocalstorageService } from './services/player-localstorage.service';
 import { PlayerModelProviderService } from './services/player-model-provider.service';
 
 @Component({
@@ -7,10 +8,17 @@ import { PlayerModelProviderService } from './services/player-model-provider.ser
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'MidgardDynamicCharacterSheet';
 
-  constructor(private pmps: PlayerModelProviderService) {
+  constructor(private pmps: PlayerModelProviderService, private plss: PlayerLocalstorageService) {
+  }
+
+  ngAfterViewInit(): void {
+    const playerFromStorage = this.plss.loadPlayer();
+    if (playerFromStorage != null) {
+      this.pmps.player = playerFromStorage;
+    }
   }
 
   get player(): Player {
