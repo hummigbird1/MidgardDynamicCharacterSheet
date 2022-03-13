@@ -10,6 +10,7 @@ export class PlayerImportExportComponent implements OnInit {
 
   constructor(private playerModelProviderService: PlayerModelProviderService) { }
 
+  actionResult: string | null = null;
   jsonContent: string | undefined;
   ngOnInit(): void {
   }
@@ -20,16 +21,38 @@ export class PlayerImportExportComponent implements OnInit {
 
   importPlayer(event: Event): void {
     if (this.jsonContent === undefined) {
+      this.actionResult = "Nothing to import. Paste a character json into the text area"
       return;
     }
     this.setPlayerFromJson(this.jsonContent);
   }
 
   exportPlayer(event: Event): void {
-    this.jsonContent = this.getPlayerAsJson();
+    try {
+      this.jsonContent = this.getPlayerAsJson();
+      this.actionResult = "Exported successfully";
+    }
+    catch (error) {
+      this.setActionResultFromError(error);
+    }
   }
 
   setPlayerFromJson(playerJson: string): void {
-    this.playerModelProviderService.player = JSON.parse(playerJson);
+    try {
+      this.playerModelProviderService.player = JSON.parse(playerJson);
+      this.actionResult = "Imported successfully";
+    }
+    catch (error) {
+      this.setActionResultFromError(error);
+    }
+  }
+
+  private setActionResultFromError(error: any): void {
+    if (typeof error === "string") {
+      this.actionResult = error;
+    }
+    else if (error instanceof Error) {
+      this.actionResult = error.message;
+    }
   }
 }

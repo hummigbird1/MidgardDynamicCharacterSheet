@@ -1,7 +1,8 @@
-<Label>
+<label>
     Spieler JSON:
     <textarea [(ngModel)]="jsonContent"></textarea>
 
-</Label>
+</label>
 <button (click)="importPlayer($event)">Import</button>
 <button (click)="exportPlayer($event)">Export</button>
+<label>{{ actionResult }}</label>
