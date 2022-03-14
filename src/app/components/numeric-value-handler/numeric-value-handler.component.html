@@ -1,9 +1,11 @@
 <label>{{ label }}
-    <input type="number" class="numeric-input" [(ngModel)]="currentValue" (ngModelChange)="onModelChange($event)" [max]='maxValue' [min]='minValue'/>
+    <input type="number" class="numeric-input" [(ngModel)]="currentValue"
+        (ngModelChange)="onModelChange($event)" [max]="maxValue" [min]="minValue" required
+        [class.invalid-input]="!isValid" />
 </label>
 
 <span class="buttonContainer">
-    <button (click)="countDown()">-</button>
-    <button (click)="countUp()">+</button>
+    <button (click)="countDown()" [disabled]="!canCountDown || !isValid">-</button>
+    <button (click)="countUp()" [disabled]="!canCountUp || !isValid">+</button>
     <button *ngIf='showReset' (click)="resetValue()">Reset</button>
 </span>
