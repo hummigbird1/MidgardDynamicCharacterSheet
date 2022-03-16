@@ -836,39 +836,78 @@ NgMaterialModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineI
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NumericValueHandlerComponent", function() { return NumericValueHandlerComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "ofXK");
+/* harmony import */ var _checkresults__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkresults */ "vJZ4");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
 
 
 
 
-function NumericValueHandlerComponent_button_8_Template(rf, ctx) { if (rf & 1) {
-    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 4);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_button_8_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2); const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r1.resetValue(); });
+
+function NumericValueHandlerComponent_span_3_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" = ", ctx_r0.projectedValue, "");
+} }
+function NumericValueHandlerComponent_button_9_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_button_9_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.resetValue(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Reset");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } }
 class NumericValueHandlerComponent {
     constructor() {
         this.label = '';
-        this.currentValue = 0;
+        this._currentValue = 0;
+        this.currentText = '0';
         this.minValue = 0;
         this.maxValue = 0;
         this.baseValue = 0;
         this.showReset = true;
         this.currentValueChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.currentTextChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.projectingValue = false;
+        this.projectedValue = 0;
     }
     get isValid() {
         if (this.currentValue === null || this.currentValue === undefined)
             return false;
-        return this.currentValue >= this.minValue && this.currentValue <= this.maxValue;
+        const canEvaluatableToNumberCheckResult = this.canEvaluatableToNumber(this.currentText);
+        if (!canEvaluatableToNumberCheckResult.isEvaluatable) {
+            return false;
+        }
+        return this.isNumberWithinRange(canEvaluatableToNumberCheckResult.value) && this.isNumberWithinRange(this._currentValue);
+    }
+    get currentValue() {
+        return this._currentValue;
+    }
+    set currentValue(val) {
+        this._currentValue = val;
+        this.currentText = this.currentValue.toString();
+        this.currentValueChange.emit(this._currentValue);
     }
     onModelChange(event) {
+        this.projectingValue = false;
         // Unclear workaround:
         // Without binding the ngModelEvent and emitting the currentValue ... direct edits of the input control are not registered outside of this component
         // Question is why?  
-        this.currentValueChange.emit(this.currentValue);
+        const isNumberCheckResult = this.isValidNumber(this.currentText);
+        const canEvaluatableToNumberCheckResult = this.canEvaluatableToNumber(this.currentText);
+        if (isNumberCheckResult.isNumber && this.isNumberWithinRange(isNumberCheckResult.value)) {
+            this.currentValue = isNumberCheckResult.value;
+        }
+        else if (canEvaluatableToNumberCheckResult.isEvaluatable && canEvaluatableToNumberCheckResult.isExpressionTerminated && this.isNumberWithinRange(canEvaluatableToNumberCheckResult.value)) {
+            this.currentValue = canEvaluatableToNumberCheckResult.value;
+        }
+        else if (canEvaluatableToNumberCheckResult.isEvaluatable && !canEvaluatableToNumberCheckResult.isExpressionTerminated) {
+            this.projectingValue = true;
+            this.projectedValue = canEvaluatableToNumberCheckResult.value;
+        }
     }
     get canCountUp() {
         return this.currentValue < this.maxValue;
@@ -879,70 +918,139 @@ class NumericValueHandlerComponent {
     // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
     countUp() {
         if (this.canCountUp) {
-            this.updateCurrentValue(Number(this.currentValue) + 1);
+            this.currentValue = (Number(this.currentValue) + 1);
         }
     }
     countDown() {
         if (this.canCountDown) {
-            this.updateCurrentValue(Number(this.currentValue) - 1);
+            this.currentValue = (Number(this.currentValue) - 1);
         }
     }
     resetValue() {
-        this.updateCurrentValue(this.baseValue);
+        if (this.isValid) {
+            this.currentValue = this.baseValue;
+        }
+        else {
+            // Restore last valid value by passing it through the public property setter
+            this.currentValue = this._currentValue;
+        }
     }
-    // TODO Only works when input is of type "text" (otherwise we cant get the raw text input to work with https://stackoverflow.com/a/18853513)
-    // But then the currentValue can change types (becoming a string instead of a number breaking other things in here (e.g. the isValid))
-    // so to make this work we would need to switch to a text input approach and make a lot of try-cast to numbers 
-    // onKeyDown(event: KeyboardEvent) {
-    //   const inputControl = event.target as HTMLInputElement;
-    //   console.log(inputControl.innerText);
-    //   if (event.key === "=") {
-    //     event.preventDefault();
-    //     try {
-    //       this.updateCurrentValue(Number(eval(inputControl.value)));
-    //     }
-    //     catch {
-    //       // inputControl.valueAsNumber = Number(this.currentValue);
-    //     }
-    //   }
-    // }
-    updateCurrentValue(value) {
-        this.currentValue = value;
-        this.currentValueChange.emit(this.currentValue);
+    isNumberWithinRange(val) {
+        return val >= this.minValue && val <= this.maxValue;
+    }
+    canEvaluatableToNumber(text) {
+        const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckEvaluatableToNumberResult"]();
+        if (this.isEmptyString(text))
+            return result;
+        try {
+            let sanitizedText = text;
+            if (text.endsWith("=")) {
+                sanitizedText = text.substring(0, text.length - 1);
+                result.isExpressionTerminated = true;
+            }
+            var evalResult = eval(sanitizedText);
+            const numberEvaluationResult = this.isValidNumber(evalResult);
+            result.isEvaluatable = numberEvaluationResult.isNumber;
+            result.value = numberEvaluationResult.value;
+            return result;
+        }
+        catch (_a) {
+            return result;
+        }
+    }
+    isValidNumber(input) {
+        if (typeof input === "string") {
+            return this.isTextValidNumber(input);
+        }
+        else if (typeof input === "number") {
+            const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckNumberResult"]();
+            result.isNumber = this.isNumberValidNumber(input);
+            result.value = input;
+            return result;
+        }
+        else {
+            return new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckNumberResult"]();
+        }
+    }
+    isNumberValidNumber(val) {
+        return Number.isSafeInteger(val);
+    }
+    isTextValidNumber(text) {
+        const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckNumberResult"]();
+        if (this.isEmptyString(text))
+            return result;
+        const convertedText = Number(text);
+        result.isNumber = this.isNumberValidNumber(convertedText);
+        result.value = convertedText;
+        return result;
+    }
+    isEmptyString(text) {
+        return text === null || text === undefined || text.trim() === '';
     }
 }
 NumericValueHandlerComponent.ɵfac = function NumericValueHandlerComponent_Factory(t) { return new (t || NumericValueHandlerComponent)(); };
-NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", currentValue: "currentValue", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset" }, outputs: { currentValueChange: "currentValueChange" }, decls: 9, vars: 9, consts: [["type", "number", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "click", 4, "ngIf"], [3, "click"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
+NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset", currentValue: "currentValue" }, outputs: { currentValueChange: "currentValueChange" }, decls: 10, vars: 10, consts: [["type", "text", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange"], [4, "ngIf"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "click", 4, "ngIf"], [3, "click"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "label");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.currentValue = $event; })("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.onModelChange($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.currentText = $event; })("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.onModelChange($event); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, NumericValueHandlerComponent_span_3_Template, 2, 1, "span", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "span", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_Template_button_click_4_listener() { return ctx.countDown(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "-");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_Template_button_click_5_listener() { return ctx.countDown(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6, "-");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_Template_button_click_6_listener() { return ctx.countUp(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "+");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_Template_button_click_7_listener() { return ctx.countUp(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "+");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, NumericValueHandlerComponent_button_8_Template, 2, 0, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, NumericValueHandlerComponent_button_9_Template, 2, 0, "button", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", ctx.label, " ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("invalid-input", !ctx.isValid);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.currentValue)("max", ctx.maxValue)("min", ctx.minValue);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngModel", ctx.currentText)("max", ctx.maxValue)("min", ctx.minValue);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.projectingValue);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.canCountDown || !ctx.isValid);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx.canCountUp || !ctx.isValid);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.showReset);
-    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["NumberValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"]], styles: [".numeric-input[_ngcontent-%COMP%] {\n  width: 50%;\n}\n\n.invalid-input[_ngcontent-%COMP%] {\n  background-color: red;\n}\n\n\n\ninput[type=number][_ngcontent-%COMP%] {\n  -moz-appearance: textfield;\n}\n\n\n\ninput[_ngcontent-%COMP%]::-webkit-outer-spin-button, input[_ngcontent-%COMP%]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 2px 15px;\n  \n  margin: 0px 2px;\n\n}\n\nbutton[_ngcontent-%COMP%]:hover {\n    transition: 0.5s;\n    background-color: teal;\n}\n\n\n\nlabel[_ngcontent-%COMP%] {\n    font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm51bWVyaWMtdmFsdWUtaGFuZGxlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVTtBQUNaOztBQUVBO0VBQ0UscUJBQXFCO0FBQ3ZCOztBQUVBLFlBQVk7O0FBQ1o7RUFDRSwwQkFBMEI7QUFDNUI7O0FBQ0EsZ0NBQWdDOztBQUNoQzs7RUFFRSx3QkFBd0I7RUFDeEIsU0FBUztBQUNYOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLG9CQUFvQjtFQUNwQixlQUFlOztBQUVqQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixzQkFBc0I7QUFDMUI7O0FBRUE7Ozs7Ozs7O0VBUUU7O0FBR0Y7SUFDSSxpQkFBaUI7QUFDckIiLCJmaWxlIjoibnVtZXJpYy12YWx1ZS1oYW5kbGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubnVtZXJpYy1pbnB1dCB7XG4gIHdpZHRoOiA1MCU7XG59XG5cbi5pbnZhbGlkLWlucHV0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xufVxuXG4vKiBGaXJlZm94ICovXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICAtbW96LWFwcGVhcmFuY2U6IHRleHRmaWVsZDtcbn1cbi8qIENocm9tZSwgU2FmYXJpLCBFZGdlLCBPcGVyYSAqL1xuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5idXR0b24ge1xuICBwYWRkaW5nOiAycHggMTVweDtcbiAgLyogZm9udC1zaXplOiAxZW07ICovXG4gIG1hcmdpbjogMHB4IDJweDtcblxufVxuXG5idXR0b246aG92ZXIge1xuICAgIHRyYW5zaXRpb246IDAuNXM7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdGVhbDtcbn1cblxuLyouYnV0dG9uQ29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleGJveDtcbiAgbWFyZ2luOiA1cHg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1hcm91bmQ7XG4gIGFsaWduLWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gIGFsaWduLWl0ZW1zOiBmbGV4LXN0YXJ0O1xufSovXG5cblxubGFiZWwge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuIl19 */"] });
+    } }, directives: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["NgModel"], _angular_common__WEBPACK_IMPORTED_MODULE_3__["NgIf"]], styles: [".numeric-input[_ngcontent-%COMP%] {\n  width: 50%;\n}\n\n.invalid-input[_ngcontent-%COMP%] {\n  background-color: red;\n}\n\n\n\ninput[type=number][_ngcontent-%COMP%] {\n  -moz-appearance: textfield;\n}\n\n\n\ninput[_ngcontent-%COMP%]::-webkit-outer-spin-button, input[_ngcontent-%COMP%]::-webkit-inner-spin-button {\n  -webkit-appearance: none;\n  margin: 0;\n}\n\nbutton[_ngcontent-%COMP%] {\n  padding: 2px 15px;\n  \n  margin: 0px 2px;\n\n}\n\nbutton[_ngcontent-%COMP%]:hover {\n    transition: 0.5s;\n    background-color: teal;\n}\n\n\n\nlabel[_ngcontent-%COMP%] {\n    font-weight: bold;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm51bWVyaWMtdmFsdWUtaGFuZGxlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsVUFBVTtBQUNaOztBQUVBO0VBQ0UscUJBQXFCO0FBQ3ZCOztBQUVBLFlBQVk7O0FBQ1o7RUFDRSwwQkFBMEI7QUFDNUI7O0FBQ0EsZ0NBQWdDOztBQUNoQzs7RUFFRSx3QkFBd0I7RUFDeEIsU0FBUztBQUNYOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLG9CQUFvQjtFQUNwQixlQUFlOztBQUVqQjs7QUFFQTtJQUNJLGdCQUFnQjtJQUNoQixzQkFBc0I7QUFDMUI7O0FBRUE7Ozs7Ozs7O0VBUUU7O0FBR0Y7SUFDSSxpQkFBaUI7QUFDckIiLCJmaWxlIjoibnVtZXJpYy12YWx1ZS1oYW5kbGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubnVtZXJpYy1pbnB1dCB7XG4gIHdpZHRoOiA1MCU7XG59XG5cbi5pbnZhbGlkLWlucHV0IHtcbiAgYmFja2dyb3VuZC1jb2xvcjogcmVkO1xufVxuXG4vKiBGaXJlZm94ICovXG5pbnB1dFt0eXBlPW51bWJlcl0ge1xuICAtbW96LWFwcGVhcmFuY2U6IHRleHRmaWVsZDtcbn1cbi8qIENocm9tZSwgU2FmYXJpLCBFZGdlLCBPcGVyYSAqL1xuaW5wdXQ6Oi13ZWJraXQtb3V0ZXItc3Bpbi1idXR0b24sXG5pbnB1dDo6LXdlYmtpdC1pbm5lci1zcGluLWJ1dHRvbiB7XG4gIC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZTtcbiAgbWFyZ2luOiAwO1xufVxuXG5idXR0b24ge1xuICBwYWRkaW5nOiAycHggMTVweDtcbiAgLyogZm9udC1zaXplOiAxZW07ICovXG4gIG1hcmdpbjogMHB4IDJweDtcblxufVxuXG5idXR0b246aG92ZXIge1xuICAgIHRyYW5zaXRpb246IDAuNXM7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdGVhbDtcbn1cblxuLyouYnV0dG9uQ29udGFpbmVyIHtcbiAgZGlzcGxheTogZmxleGJveDtcbiAgbWFyZ2luOiA1cHg7XG4gIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gIGZsZXgtd3JhcDogd3JhcDtcbiAganVzdGlmeS1jb250ZW50OiBzcGFjZS1hcm91bmQ7XG4gIGFsaWduLWNvbnRlbnQ6IGZsZXgtc3RhcnQ7XG4gIGFsaWduLWl0ZW1zOiBmbGV4LXN0YXJ0O1xufSovXG5cblxubGFiZWwge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xufVxuIl19 */"] });
+
+
+/***/ }),
+
+/***/ "vJZ4":
+/*!******************************************************************!*\
+  !*** ./src/app/components/numeric-value-handler/checkresults.ts ***!
+  \******************************************************************/
+/*! exports provided: CheckNumberResult, CheckEvaluatableToNumberResult */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckNumberResult", function() { return CheckNumberResult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CheckEvaluatableToNumberResult", function() { return CheckEvaluatableToNumberResult; });
+class CheckNumberResult {
+    constructor() {
+        this.isNumber = false;
+        this.value = Number.NaN;
+    }
+}
+class CheckEvaluatableToNumberResult {
+    constructor() {
+        this.isEvaluatable = false;
+        this.isExpressionTerminated = false;
+        this.value = Number.NaN;
+    }
+}
 
 
 /***/ }),
