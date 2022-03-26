@@ -199,8 +199,14 @@ class Player {
         this.name = "";
         this.baseStats = new Stats();
         this.currentStats = new Stats();
+        this.attributes = new Attributes();
         this.valueables = new PlayerValueables();
         this.items = [];
+    }
+}
+class Attributes {
+    constructor() {
+        this.strength = 0;
     }
 }
 class PlayerValueables {
@@ -895,7 +901,7 @@ class NumericValueHandlerComponent {
         this.projectingValue = false;
         // Unclear workaround:
         // Without binding the ngModelEvent and emitting the currentValue ... direct edits of the input control are not registered outside of this component
-        // Question is why?  
+        // Question is why?
         const isNumberCheckResult = this.isValidNumber(this.currentText);
         const canEvaluatableToNumberCheckResult = this.canEvaluatableToNumber(this.currentText);
         if (isNumberCheckResult.isNumber && this.isNumberWithinRange(isNumberCheckResult.value)) {
@@ -918,12 +924,12 @@ class NumericValueHandlerComponent {
     // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
     countUp() {
         if (this.canCountUp) {
-            this.currentValue = (Number(this.currentValue) + 1);
+            this.currentValue = this.currentValue + 1;
         }
     }
     countDown() {
         if (this.canCountDown) {
-            this.currentValue = (Number(this.currentValue) - 1);
+            this.currentValue = this.currentValue - 1;
         }
     }
     resetValue() {
@@ -963,9 +969,10 @@ class NumericValueHandlerComponent {
             return this.isTextValidNumber(input);
         }
         else if (typeof input === "number") {
+            const flooredNumber = this.getFlooredValue(input);
             const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckNumberResult"]();
-            result.isNumber = this.isNumberValidNumber(input);
-            result.value = input;
+            result.isNumber = this.isNumberValidNumber(flooredNumber);
+            result.value = flooredNumber;
             return result;
         }
         else {
@@ -975,13 +982,16 @@ class NumericValueHandlerComponent {
     isNumberValidNumber(val) {
         return Number.isSafeInteger(val);
     }
+    getFlooredValue(val) {
+        return Math.floor(val);
+    }
     isTextValidNumber(text) {
         const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckNumberResult"]();
         if (this.isEmptyString(text))
             return result;
-        const convertedText = Number(text);
-        result.isNumber = this.isNumberValidNumber(convertedText);
-        result.value = convertedText;
+        const converterFlooredNumber = this.getFlooredValue(Number(text).valueOf());
+        result.isNumber = this.isNumberValidNumber(converterFlooredNumber);
+        result.value = converterFlooredNumber;
         return result;
     }
     isEmptyString(text) {
