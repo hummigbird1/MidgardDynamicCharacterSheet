@@ -9,16 +9,16 @@ import { CheckEvaluatableToNumberResult, CheckNumberResult } from './checkresult
 export class NumericValueHandlerComponent {
 
   @Input() label: string = '';
-  _currentValue: Number = 0;
+  _currentValue: number = 0;
   currentText: string = '0';
-  @Input() minValue: Number = 0;
-  @Input() maxValue: Number = 0;
-  @Input() baseValue: Number = 0;
+  @Input() minValue: number = 0;
+  @Input() maxValue: number = 0;
+  @Input() baseValue: number = 0;
   @Input() showReset: boolean = true;
-  @Output() currentValueChange = new EventEmitter<Number>();
+  @Output() currentValueChange = new EventEmitter<number>();
   currentTextChange = new EventEmitter<string>();
   projectingValue: boolean = false;
-  projectedValue: Number = 0;
+  projectedValue: number = 0;
 
   constructor() { }
 
@@ -34,12 +34,13 @@ export class NumericValueHandlerComponent {
     return this.isNumberWithinRange(canEvaluatableToNumberCheckResult.value) && this.isNumberWithinRange(this._currentValue);
   }
 
-  @Input()
-  get currentValue(): Number {
+  
+  get currentValue(): number {
     return this._currentValue;
   }
 
-  set currentValue(val: Number) {
+  @Input()
+  set currentValue(val: number) {
     this._currentValue = val;
     this.currentText = this.currentValue.toString();
     this.currentValueChange.emit(this._currentValue);
@@ -50,7 +51,7 @@ export class NumericValueHandlerComponent {
     this.projectingValue = false;
     // Unclear workaround:
     // Without binding the ngModelEvent and emitting the currentValue ... direct edits of the input control are not registered outside of this component
-    // Question is why?  
+    // Question is why?
     const isNumberCheckResult = this.isValidNumber(this.currentText);
     const canEvaluatableToNumberCheckResult = this.canEvaluatableToNumber(this.currentText);
     if (isNumberCheckResult.isNumber && this.isNumberWithinRange(isNumberCheckResult.value)) {
@@ -76,13 +77,13 @@ export class NumericValueHandlerComponent {
   // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
   countUp() {
     if (this.canCountUp) {
-      this.currentValue = (Number(this.currentValue) + 1);
+      this.currentValue = this.currentValue + 1;
     }
   }
 
   countDown() {
     if (this.canCountDown) {
-      this.currentValue = (Number(this.currentValue) - 1);
+      this.currentValue = this.currentValue - 1;
     }
   }
 
@@ -96,7 +97,7 @@ export class NumericValueHandlerComponent {
     }
   }
 
-  private isNumberWithinRange(val: Number): boolean {
+  private isNumberWithinRange(val: number): boolean {
     return val >= this.minValue && val <= this.maxValue;
   }
 
@@ -129,27 +130,32 @@ export class NumericValueHandlerComponent {
       return this.isTextValidNumber(input);
     }
     else if (typeof input === "number") {
+      const flooredNumber = this.getFlooredValue(input);
       const result = new CheckNumberResult();
-      result.isNumber = this.isNumberValidNumber(input);
-      result.value = input;
+      result.isNumber = this.isNumberValidNumber(flooredNumber);
+      result.value = flooredNumber
       return result;
     }
     else {
       return new CheckNumberResult();
     }
   }
-  private isNumberValidNumber(val: Number): boolean {
+  private isNumberValidNumber(val: number): boolean {
     return Number.isSafeInteger(val);
   }
+
+  private getFlooredValue(val: number): number {
+    return Math.floor(val);
+  } 
 
   private isTextValidNumber(text: string): CheckNumberResult {
     const result = new CheckNumberResult();
     if (this.isEmptyString(text))
       return result;
 
-    const convertedText = Number(text);
-    result.isNumber = this.isNumberValidNumber(convertedText);
-    result.value = convertedText;
+    const converterFlooredNumber = this.getFlooredValue(Number(text).valueOf());
+    result.isNumber = this.isNumberValidNumber(converterFlooredNumber);
+    result.value = converterFlooredNumber;
     return result;
   }
 

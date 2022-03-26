@@ -2,8 +2,13 @@ export class Player {
     name: string = "";
     baseStats: Stats = new Stats();
     currentStats: Stats = new Stats();
+    attributes: Attributes = new Attributes();
     valueables: PlayerValueables = new PlayerValueables();
     items: Item[] = [];
+}
+
+class Attributes {
+  strength: number = 0;
 }
 
 class PlayerValueables {
@@ -12,24 +17,24 @@ class PlayerValueables {
 }
 
 class Coins {
-    gold: Number = 0;
-    silver: Number = 0;
-    copper: Number = 0;
+    gold: number = 0;
+    silver: number = 0;
+    copper: number = 0;
 }
 
 class Jewels {
-    fifties: Number = 0;
-    hundreds: Number = 0;
-    thousands: Number = 0;
+    fifties: number = 0;
+    hundreds: number = 0;
+    thousands: number = 0;
 }
 
 class Stats {
-    hitPoints: Number = 0;
-    actionPoints: Number = 0;
+    hitPoints: number = 0;
+    actionPoints: number = 0;
 }
 
 export class Item {
     name: string | null = null;
     description: string | null = null;
-    quantity: Number = 1;
+    quantity: number = 1;
 }
