@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Item, Player } from 'src/app/models/player';
+import { ConsumableItem, Player } from 'src/app/models/player';
 
 @Component({
   selector: 'app-adventure-sheet',
@@ -17,10 +17,10 @@ export class AdventureSheetComponent implements OnInit {
   }
 
   addItem(event: Event): void {
-    this.player.items.push(new Item());
+    this.player.items.push(new ConsumableItem());
   }
 
-  removeItem(itemToRemove: Item): void{
+  removeItem(itemToRemove: ConsumableItem): void{
     var itemIndex = this.player.items.indexOf(itemToRemove);
     this.player.items.splice(itemIndex, 1);
   }
