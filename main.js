@@ -861,19 +861,19 @@ function NumericValueHandlerComponent_span_3_Template(rf, ctx) { if (rf & 1) {
 } }
 function NumericValueHandlerComponent_button_9_Template(rf, ctx) { if (rf & 1) {
     const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_button_9_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.resetValue(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Reset");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", !ctx_r1.canReset);
 } }
 class NumericValueHandlerComponent {
     constructor() {
         this.label = '';
         this._currentValue = 0;
         this.currentText = '0';
-        this.minValue = 0;
-        this.maxValue = 0;
-        this.baseValue = 0;
         this.showReset = true;
         this.currentValueChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.currentTextChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
@@ -916,10 +916,21 @@ class NumericValueHandlerComponent {
         }
     }
     get canCountUp() {
+        if (this.maxValue === undefined) {
+            return true;
+        }
         return this.currentValue < this.maxValue;
     }
     get canCountDown() {
+        if (this.minValue === undefined) {
+            return true;
+        }
         return this.currentValue > this.minValue;
+    }
+    get canReset() {
+        return (this.baseValue !== undefined && this.baseValue != this.currentValue)
+            || this.projectingValue
+            || !this.isValid;
     }
     // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
     countUp() {
@@ -933,16 +944,28 @@ class NumericValueHandlerComponent {
         }
     }
     resetValue() {
-        if (this.isValid) {
-            this.currentValue = this.baseValue;
+        if (!this.canReset) {
+            return;
         }
-        else {
+        if (this.projectingValue || !this.isValid) {
             // Restore last valid value by passing it through the public property setter
             this.currentValue = this._currentValue;
         }
+        else if (this.isValid && this.baseValue !== undefined) {
+            this.currentValue = this.baseValue;
+        }
+        this.projectingValue = false;
     }
     isNumberWithinRange(val) {
-        return val >= this.minValue && val <= this.maxValue;
+        let isMinValid = true;
+        let isMaxValid = true;
+        if (this.maxValue !== undefined) {
+            isMaxValid = val <= this.maxValue;
+        }
+        if (this.minValue !== undefined) {
+            isMinValid = val >= this.minValue;
+        }
+        return isMinValid && isMaxValid;
     }
     canEvaluatableToNumber(text) {
         const result = new _checkresults__WEBPACK_IMPORTED_MODULE_1__["CheckEvaluatableToNumberResult"]();
@@ -999,7 +1022,7 @@ class NumericValueHandlerComponent {
     }
 }
 NumericValueHandlerComponent.ɵfac = function NumericValueHandlerComponent_Factory(t) { return new (t || NumericValueHandlerComponent)(); };
-NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset", currentValue: "currentValue" }, outputs: { currentValueChange: "currentValueChange" }, decls: 10, vars: 10, consts: [["type", "text", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange"], [4, "ngIf"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "click", 4, "ngIf"], [3, "click"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
+NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset", currentValue: "currentValue" }, outputs: { currentValueChange: "currentValueChange" }, decls: 10, vars: 10, consts: [["type", "text", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange"], [4, "ngIf"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "disabled", "click", 4, "ngIf"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "label");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 0);
@@ -1016,7 +1039,7 @@ NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__[
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function NumericValueHandlerComponent_Template_button_click_7_listener() { return ctx.countUp(); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](8, "+");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, NumericValueHandlerComponent_button_9_Template, 2, 0, "button", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](9, NumericValueHandlerComponent_button_9_Template, 2, 1, "button", 4);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
