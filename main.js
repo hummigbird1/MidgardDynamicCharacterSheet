@@ -897,6 +897,28 @@ class NumericValueHandlerComponent {
         this.currentText = this.currentValue.toString();
         this.currentValueChange.emit(this._currentValue);
     }
+    onKeyDown(event) {
+        let handled = false;
+        switch (event.key) {
+            case "Escape":
+                this.resetValue();
+                handled = true;
+                break;
+            case "Up":
+            case "ArrowUp":
+                this.countUp();
+                handled = true;
+                break;
+            case "Down":
+            case "ArrowDown":
+                this.countDown();
+                handled = true;
+                break;
+        }
+        if (handled) {
+            event.preventDefault();
+        }
+    }
     onModelChange(event) {
         this.projectingValue = false;
         // Unclear workaround:
@@ -1022,11 +1044,11 @@ class NumericValueHandlerComponent {
     }
 }
 NumericValueHandlerComponent.ɵfac = function NumericValueHandlerComponent_Factory(t) { return new (t || NumericValueHandlerComponent)(); };
-NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset", currentValue: "currentValue" }, outputs: { currentValueChange: "currentValueChange" }, decls: 10, vars: 10, consts: [["type", "text", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange"], [4, "ngIf"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "disabled", "click", 4, "ngIf"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
+NumericValueHandlerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: NumericValueHandlerComponent, selectors: [["app-numeric-value-handler"]], inputs: { label: "label", minValue: "minValue", maxValue: "maxValue", baseValue: "baseValue", showReset: "showReset", currentValue: "currentValue" }, outputs: { currentValueChange: "currentValueChange" }, decls: 10, vars: 10, consts: [["type", "text", "required", "", 1, "numeric-input", 3, "ngModel", "max", "min", "ngModelChange", "keydown"], [4, "ngIf"], [1, "buttonContainer"], [3, "disabled", "click"], [3, "disabled", "click", 4, "ngIf"]], template: function NumericValueHandlerComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "label");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "input", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.currentText = $event; })("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.onModelChange($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.currentText = $event; })("ngModelChange", function NumericValueHandlerComponent_Template_input_ngModelChange_2_listener($event) { return ctx.onModelChange($event); })("keydown", function NumericValueHandlerComponent_Template_input_keydown_2_listener($event) { return ctx.onKeyDown($event); });
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, NumericValueHandlerComponent_span_3_Template, 2, 1, "span", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
