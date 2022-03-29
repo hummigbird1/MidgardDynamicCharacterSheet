@@ -1,12 +1,12 @@
 <label>{{ label }}
     <input type="text" class="numeric-input" [(ngModel)]="currentText"
         (ngModelChange)="onModelChange($event)" [max]="maxValue" [min]="minValue" required
-        [class.invalid-input]="!isValid" />
+        [class.invalid-input]="!isValid" (keydown)="onKeyDown($event)" />
         <span *ngIf="projectingValue"> = {{ projectedValue }}</span>
 </label>
 
 <span class="buttonContainer">
     <button (click)="countDown()" [disabled]="!canCountDown || !isValid">-</button>
     <button (click)="countUp()" [disabled]="!canCountUp || !isValid">+</button>
-    <button *ngIf='showReset' (click)="resetValue()">Reset</button>
+    <button *ngIf='showReset' (click)="resetValue()" [disabled]="!canReset">Reset</button>
 </span>
