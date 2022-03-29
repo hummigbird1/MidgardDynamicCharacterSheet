@@ -11,9 +11,9 @@ export class NumericValueHandlerComponent {
   @Input() label: string = '';
   _currentValue: number = 0;
   currentText: string = '0';
-  @Input() minValue: number = 0;
-  @Input() maxValue: number = 0;
-  @Input() baseValue: number = 0;
+  @Input() minValue: number | undefined;
+  @Input() maxValue: number | undefined;
+  @Input() baseValue: number | undefined;
   @Input() showReset: boolean = true;
   @Output() currentValueChange = new EventEmitter<number>();
   currentTextChange = new EventEmitter<string>();
@@ -67,11 +67,23 @@ export class NumericValueHandlerComponent {
   }
 
   get canCountUp() {
+    if(this.maxValue === undefined){
+      return true;
+    }
     return this.currentValue < this.maxValue;
   }
 
   get canCountDown() {
+    if(this.minValue === undefined){
+      return true;
+    }
     return this.currentValue > this.minValue;
+  }
+
+  get canReset() {
+    return (this.baseValue !== undefined && this.baseValue != this.currentValue) 
+    || this.projectingValue
+    || !this.isValid;
   }
 
   // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
@@ -88,17 +100,30 @@ export class NumericValueHandlerComponent {
   }
 
   resetValue() {
-    if (this.isValid) {
-      this.currentValue = this.baseValue;
+    if(!this.canReset) {
+      return;
     }
-    else {
+
+    if(this.projectingValue || !this.isValid) {
       // Restore last valid value by passing it through the public property setter
       this.currentValue = this._currentValue;
     }
+    else if(this.isValid && this.baseValue !== undefined) {
+      this.currentValue = this.baseValue;
+    }
+    this.projectingValue = false;
   }
 
   private isNumberWithinRange(val: number): boolean {
-    return val >= this.minValue && val <= this.maxValue;
+    let isMinValid = true;
+    let isMaxValid = true;
+    if(this.maxValue !== undefined) {
+      isMaxValid = val <= this.maxValue;
+    } 
+    if(this.minValue !== undefined){ 
+      isMinValid = val >= this.minValue;
+    }
+    return isMinValid && isMaxValid;
   }
 
   private canEvaluatableToNumber(text: string): CheckEvaluatableToNumberResult {

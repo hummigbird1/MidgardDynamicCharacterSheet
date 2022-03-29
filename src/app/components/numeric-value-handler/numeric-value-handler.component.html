@@ -8,5 +8,5 @@
 <span class="buttonContainer">
     <button (click)="countDown()" [disabled]="!canCountDown || !isValid">-</button>
     <button (click)="countUp()" [disabled]="!canCountUp || !isValid">+</button>
-    <button *ngIf='showReset' (click)="resetValue()">Reset</button>
+    <button *ngIf='showReset' (click)="resetValue()" [disabled]="!canReset">Reset</button>
 </span>
