@@ -34,7 +34,7 @@ export class NumericValueHandlerComponent {
     return this.isNumberWithinRange(canEvaluatableToNumberCheckResult.value) && this.isNumberWithinRange(this._currentValue);
   }
 
-  
+
   get currentValue(): number {
     return this._currentValue;
   }
@@ -45,6 +45,30 @@ export class NumericValueHandlerComponent {
     this.currentText = this.currentValue.toString();
     this.currentValueChange.emit(this._currentValue);
 
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    let handled = false;
+    switch (event.key) {
+      case "Escape":
+        this.resetValue();
+        handled = true;
+        break;
+      case "Up":
+      case "ArrowUp":
+        this.countUp();
+        handled = true;
+        break;
+      case "Down":
+      case "ArrowDown":
+        this.countDown();
+        handled = true;
+        break;
+
+    }
+    if (handled) {
+      event.preventDefault();
+    }
   }
 
   onModelChange(event: Event): void {
@@ -67,23 +91,23 @@ export class NumericValueHandlerComponent {
   }
 
   get canCountUp() {
-    if(this.maxValue === undefined){
+    if (this.maxValue === undefined) {
       return true;
     }
     return this.currentValue < this.maxValue;
   }
 
   get canCountDown() {
-    if(this.minValue === undefined){
+    if (this.minValue === undefined) {
       return true;
     }
     return this.currentValue > this.minValue;
   }
 
   get canReset() {
-    return (this.baseValue !== undefined && this.baseValue != this.currentValue) 
-    || this.projectingValue
-    || !this.isValid;
+    return (this.baseValue !== undefined && this.baseValue != this.currentValue)
+      || this.projectingValue
+      || !this.isValid;
   }
 
   // TODO MaxWert muss überschreibbar werden wenn man z.B. im Level Up Modus ist
@@ -100,15 +124,15 @@ export class NumericValueHandlerComponent {
   }
 
   resetValue() {
-    if(!this.canReset) {
+    if (!this.canReset) {
       return;
     }
 
-    if(this.projectingValue || !this.isValid) {
+    if (this.projectingValue || !this.isValid) {
       // Restore last valid value by passing it through the public property setter
       this.currentValue = this._currentValue;
     }
-    else if(this.isValid && this.baseValue !== undefined) {
+    else if (this.isValid && this.baseValue !== undefined) {
       this.currentValue = this.baseValue;
     }
     this.projectingValue = false;
@@ -117,10 +141,10 @@ export class NumericValueHandlerComponent {
   private isNumberWithinRange(val: number): boolean {
     let isMinValid = true;
     let isMaxValid = true;
-    if(this.maxValue !== undefined) {
+    if (this.maxValue !== undefined) {
       isMaxValid = val <= this.maxValue;
-    } 
-    if(this.minValue !== undefined){ 
+    }
+    if (this.minValue !== undefined) {
       isMinValid = val >= this.minValue;
     }
     return isMinValid && isMaxValid;
@@ -171,7 +195,7 @@ export class NumericValueHandlerComponent {
 
   private getFlooredValue(val: number): number {
     return Math.floor(val);
-  } 
+  }
 
   private isTextValidNumber(text: string): CheckNumberResult {
     const result = new CheckNumberResult();

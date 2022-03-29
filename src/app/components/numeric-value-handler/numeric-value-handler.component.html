@@ -1,7 +1,7 @@
 <label>{{ label }}
     <input type="text" class="numeric-input" [(ngModel)]="currentText"
         (ngModelChange)="onModelChange($event)" [max]="maxValue" [min]="minValue" required
-        [class.invalid-input]="!isValid" />
+        [class.invalid-input]="!isValid" (keydown)="onKeyDown($event)" />
         <span *ngIf="projectingValue"> = {{ projectedValue }}</span>
 </label>
 
