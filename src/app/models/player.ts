@@ -39,8 +39,34 @@ export class Player {
         new Skill("Betäuben", 0),
         new Skill("Beredsamkeit", 0),
         new Skill("Beschatten", 0),
-        // TODO add remaining other skills
-
+        new Skill("Fallen entdecken", 0),
+        new Skill("Fallenmech.", 0),
+        new Skill("Fallenstellen", 0),
+        new Skill("Geländelauf", 0),
+        new Skill("Horchen", 0),
+        new Skill("Kanufahren", 0),
+        new Skill("Klettern", 0),
+        new Skill("Mechanik", 0),
+        new Skill("Reiten", 0),
+        new Skill("Rudern", 0),
+        new Skill("Schleichen", 0),
+        new Skill("Schlittenfahren", 0),
+        new Skill("Schlösser öffnen", 0),
+        new Skill("Schwimmen", 0),
+        new Skill("Seilkunst", 0),
+        new Skill("Springen", 0),
+        new Skill("Spurenlesen", 0),
+        new Skill("Stehlen", 0),
+        new Skill("Tauchen", 0),
+        new Skill("Überleben", 0),
+        new Skill("Verführen", 0),
+        new Skill("Verhören", 0),
+        new Skill("Verkleiden", 0),
+        new Skill("Wagenlenken", 0),
+        new Skill("Wahrnehmung", 0),
+        new Skill("Werfen/Fangen", 0),
+        new Skill("Winden", 0),
+        new Skill("Magierstab", 0),
     ];
     // Grundkenntnisse
     knowledge: Skill[] = [
@@ -120,7 +146,7 @@ export class Skill {
         this.name = name;
         this.level = level;
     }
-    // Fertigkeit<
+    // Fertigkeit
     name: string = "";
     // EW
     level: number = 0;
