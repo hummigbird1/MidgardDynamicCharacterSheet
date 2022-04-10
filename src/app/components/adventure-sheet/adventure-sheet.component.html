@@ -54,26 +54,22 @@
         <table class="material-table">
             <thead>
                 <tr class="material-row">
-                    <th>Name</th>
-                    <th>Beschreibung</th>
+                    <th>Name/Beschreibung</th>
                     <th>Menge</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of player.items">
-                    <td>
+                    <td class="Material-Column1">
                         <input class="material-description" [(ngModel)]="item.name">
-                    </td>
-                    <td>
                         <textarea class="material-description" [(ngModel)]="item.description"></textarea>
                     </td>
-                    <td>
-                        <app-numeric-value-handler label="" [(currentValue)]="item.quantity" [minValue]="0"
-                            [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
-                    </td>
-                    <td>
-                        <button (click)="removeItem(item)">-</button>
+                    <td class="Material-Quantity-Alignment Material-Column2">
+                        <div class="HorizontalFlexbox">
+                            <app-numeric-value-handler label="" [(currentValue)]="item.quantity" [minValue]="0"
+                                [maxValue]="99999999999" [showReset]="false"></app-numeric-value-handler>
+                            <button (click)="removeItem(item)">x</button>
+                        </div>
                     </td>
                 </tr>
             </tbody>

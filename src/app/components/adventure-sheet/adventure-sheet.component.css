@@ -142,3 +142,16 @@ td, th {
 	display: flex;
 	flex-direction: row;
 }
+
+.Material-Quantity-Alignment{
+	vertical-align: top;
+}
+
+.Material-Column1{
+	width: 85%;
+}
+
+.Material-Column2{
+	width: 10%;
+	height: 100%;
+}
