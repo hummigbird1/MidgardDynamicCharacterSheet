@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
 
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule} from '@angular/material/divider';
-import { MatListModule} from '@angular/material/list';
+import { MatLegacyListModule as MatListModule} from '@angular/material/legacy-list';
 import { TabsComponent } from './tabs/tabs.component'
 
 
