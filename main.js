@@ -50,7 +50,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/player-model-provider.service */ 3889);
 /* harmony import */ var _services_player_localstorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/player-localstorage.service */ 6297);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/legacy-tabs */ 2821);
+/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
 /* harmony import */ var _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/numeric-value-handler/numeric-value-handler.component */ 446);
 /* harmony import */ var _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/adventure-sheet/adventure-sheet.component */ 1525);
 /* harmony import */ var _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/player-import-export/player-import-export.component */ 4706);
@@ -141,8 +141,8 @@ AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵ
       _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("baseValue", 500)("showReset", false)("minValue", 0)("maxValue", 99999999);
     }
   },
-  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_8__.RouterOutlet, _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_9__.MatLegacyTabGroup, _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_9__.MatLegacyTab, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_3__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_4__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_5__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_6__.PlayerLocalstorageComponent],
-  styles: ["app-numeric-value-handler[_ngcontent-%COMP%] {\n  margin: 20px;\n}\n\nmat-tab-label-content[_ngcontent-%COMP%] {\n  display: inline-flex;\n  justify-content: center;\n  align-items: center;\n  white-space: nowrap;\n  color: black !important;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxvQkFBb0I7RUFDcEIsdUJBQXVCO0VBQ3ZCLG1CQUFtQjtFQUNuQixtQkFBbUI7RUFDbkIsdUJBQXVCO0FBQ3pCIiwic291cmNlc0NvbnRlbnQiOlsiYXBwLW51bWVyaWMtdmFsdWUtaGFuZGxlciB7XG4gIG1hcmdpbjogMjBweDtcbn1cblxubWF0LXRhYi1sYWJlbC1jb250ZW50IHtcbiAgZGlzcGxheTogaW5saW5lLWZsZXg7XG4gIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBjb2xvcjogYmxhY2sgIWltcG9ydGFudDtcbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */"]
+  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_8__.RouterOutlet, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__.MatTab, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__.MatTabGroup, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_3__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_4__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_5__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_6__.PlayerLocalstorageComponent],
+  styles: ["app-numeric-value-handler[_ngcontent-%COMP%] {\n  margin: 20px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0FBQ2QiLCJzb3VyY2VzQ29udGVudCI6WyJhcHAtbnVtZXJpYy12YWx1ZS1oYW5kbGVyIHtcbiAgbWFyZ2luOiAyMHB4O1xufSJdLCJzb3VyY2VSb290IjoiIn0= */"]
 });
 
 /***/ }),
@@ -1334,11 +1334,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NgMaterialModule": () => (/* binding */ NgMaterialModule)
 /* harmony export */ });
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/legacy-tabs */ 2821);
-/* harmony import */ var _angular_material_legacy_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/legacy-button */ 9159);
+/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/button */ 4522);
 /* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/icon */ 7822);
 /* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/divider */ 1528);
-/* harmony import */ var _angular_material_legacy_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/legacy-list */ 744);
+/* harmony import */ var _angular_material_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/list */ 6517);
 /* harmony import */ var _tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tabs/tabs.component */ 2887);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
 
@@ -1357,13 +1357,13 @@ NgMaterialModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__
   type: NgMaterialModule
 });
 NgMaterialModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({
-  imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_3__.MatLegacyTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_legacy_list__WEBPACK_IMPORTED_MODULE_6__.MatLegacyListModule, _angular_material_legacy_button__WEBPACK_IMPORTED_MODULE_7__.MatLegacyButtonModule, _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_3__.MatLegacyTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_legacy_list__WEBPACK_IMPORTED_MODULE_6__.MatLegacyListModule, _angular_material_legacy_button__WEBPACK_IMPORTED_MODULE_7__.MatLegacyButtonModule]
+  imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule]
 });
 (function () {
   (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](NgMaterialModule, {
     declarations: [_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__.TabsComponent],
-    imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_3__.MatLegacyTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_legacy_list__WEBPACK_IMPORTED_MODULE_6__.MatLegacyListModule, _angular_material_legacy_button__WEBPACK_IMPORTED_MODULE_7__.MatLegacyButtonModule],
-    exports: [_angular_material_legacy_tabs__WEBPACK_IMPORTED_MODULE_3__.MatLegacyTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_legacy_list__WEBPACK_IMPORTED_MODULE_6__.MatLegacyListModule, _angular_material_legacy_button__WEBPACK_IMPORTED_MODULE_7__.MatLegacyButtonModule, _tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__.TabsComponent]
+    imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule],
+    exports: [_angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule, _tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__.TabsComponent]
   });
 })();
 
