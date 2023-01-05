@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Player } from 'src/app/models/player';
 
 import { AdventureSheetComponent } from './adventure-sheet.component';
 
@@ -16,6 +17,7 @@ describe('AdventureSheetComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AdventureSheetComponent);
     component = fixture.componentInstance;
+    component.player = new Player();
     fixture.detectChanges();
   });
 
