@@ -163,7 +163,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/numeric-value-handler/numeric-value-handler.component */ 446);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser/animations */ 7146);
-/* harmony import */ var _ng_material_ng_material_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ng-material/ng-material.module */ 4345);
+/* harmony import */ var _ng_material_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ng-material.module */ 4574);
 /* harmony import */ var _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/adventure-sheet/adventure-sheet.component */ 1525);
 /* harmony import */ var _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/player-import-export/player-import-export.component */ 4706);
 /* harmony import */ var _services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/player-model-provider.service */ 3889);
@@ -193,12 +193,12 @@ AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵd
 });
 AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({
   providers: [_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_6__.PlayerModelProviderService],
-  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
+  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
 });
 (function () {
   (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](AppModule, {
     declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_7__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_8__.PlayerLocalstorageComponent],
-    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
+    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
   });
 })();
 
@@ -821,6 +821,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var src_app_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/player-model-provider.service */ 3889);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/button */ 4522);
+
 
 
 
@@ -828,14 +830,15 @@ class PlayerImportExportComponent {
   constructor(playerModelProviderService) {
     this.playerModelProviderService = playerModelProviderService;
     this.actionResult = null;
+    this.jsonContent = '';
   }
   ngOnInit() {}
   getPlayerAsJson() {
     return JSON.stringify(this.playerModelProviderService.player, null, 2);
   }
   importPlayer(event) {
-    if (this.jsonContent === undefined) {
-      this.actionResult = "Nothing to import. Paste a character json into the text area";
+    if (this.jsonContent === undefined || this.jsonContent == '') {
+      this.actionResult = "Nothing to import. Paste a character json into the text area!";
       return;
     }
     this.setPlayerFromJson(this.jsonContent);
@@ -870,43 +873,43 @@ PlayerImportExportComponent.ɵfac = function PlayerImportExportComponent_Factory
 PlayerImportExportComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
   type: PlayerImportExportComponent,
   selectors: [["app-player-import-export"]],
-  decls: 9,
+  decls: 11,
   vars: 2,
-  consts: [[3, "ngModel", "ngModelChange"], [3, "click"]],
+  consts: [[1, "action-area"], ["mat-raised-button", "", 3, "click"], [1, "data-area"], [1, "data-text", 3, "ngModel", "ngModelChange"]],
   template: function PlayerImportExportComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "label");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " Spieler JSON: ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "textarea", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function PlayerImportExportComponent_Template_textarea_ngModelChange_2_listener($event) {
-        return ctx.jsonContent = $event;
-      });
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "button", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerImportExportComponent_Template_button_click_3_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0)(1, "button", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerImportExportComponent_Template_button_click_1_listener($event) {
         return ctx.importPlayer($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, "Import");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, "Import");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "button", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerImportExportComponent_Template_button_click_5_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](3, "button", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function PlayerImportExportComponent_Template_button_click_3_listener($event) {
         return ctx.exportPlayer($event);
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6, "Export");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](4, "Export");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "label");
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](5, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "div", 2)(8, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](9, " Spieler JSON: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](10, "textarea", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function PlayerImportExportComponent_Template_textarea_ngModelChange_10_listener($event) {
+        return ctx.jsonContent = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()()();
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.jsonContent);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](6);
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate"](ctx.actionResult);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngModel", ctx.jsonContent);
     }
   },
-  dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgModel],
-  styles: ["\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */"]
+  dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgModel, _angular_material_button__WEBPACK_IMPORTED_MODULE_3__.MatButton],
+  styles: ["button[_ngcontent-%COMP%] {\n    margin: 2px 5px;\n}\n\n.data-area[_ngcontent-%COMP%] {\n    width: 800px;\n    height: 600px;\n    margin: 5px;\n}\n\n.data-text[_ngcontent-%COMP%] {\n    width: 99%;\n    height: 95%;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29tcG9uZW50cy9wbGF5ZXItaW1wb3J0LWV4cG9ydC9wbGF5ZXItaW1wb3J0LWV4cG9ydC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTtJQUNJLFlBQVk7SUFDWixhQUFhO0lBQ2IsV0FBVztBQUNmOztBQUVBO0lBQ0ksVUFBVTtJQUNWLFdBQVc7QUFDZiIsInNvdXJjZXNDb250ZW50IjpbImJ1dHRvbiB7XG4gICAgbWFyZ2luOiAycHggNXB4O1xufVxuXG4uZGF0YS1hcmVhIHtcbiAgICB3aWR0aDogODAwcHg7XG4gICAgaGVpZ2h0OiA2MDBweDtcbiAgICBtYXJnaW46IDVweDtcbn1cblxuLmRhdGEtdGV4dCB7XG4gICAgd2lkdGg6IDk5JTtcbiAgICBoZWlnaHQ6IDk1JTtcbn0iXSwic291cmNlUm9vdCI6IiJ9 */"]
 });
 
 /***/ }),
@@ -924,6 +927,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var src_app_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/player-model-provider.service */ 3889);
 /* harmony import */ var src_app_services_player_localstorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/player-localstorage.service */ 6297);
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/button */ 4522);
+
 
 
 
@@ -979,7 +984,7 @@ PlayerLocalstorageComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
   selectors: [["app-player-localstorage"]],
   decls: 8,
   vars: 1,
-  consts: [[3, "click"]],
+  consts: [["mat-raised-button", "", 3, "click"], ["mat-raised-button", "", "color", "warn", 3, "click"]],
   template: function PlayerLocalstorageComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "button", 0);
@@ -994,7 +999,7 @@ PlayerLocalstorageComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](3, "Save");
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "button", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "button", 1);
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function PlayerLocalstorageComponent_Template_button_click_4_listener($event) {
         return ctx.deletePlayerFromStorage($event);
       });
@@ -1009,7 +1014,8 @@ PlayerLocalstorageComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
       _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate"](ctx.actionResult);
     }
   },
-  styles: ["\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */"]
+  dependencies: [_angular_material_button__WEBPACK_IMPORTED_MODULE_3__.MatButton],
+  styles: ["button[_ngcontent-%COMP%] {\n    margin: 2px 5px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29tcG9uZW50cy9wbGF5ZXItbG9jYWxzdG9yYWdlL3BsYXllci1sb2NhbHN0b3JhZ2UuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGVBQWU7QUFDbkIiLCJzb3VyY2VzQ29udGVudCI6WyJidXR0b24ge1xuICAgIG1hcmdpbjogMnB4IDVweDtcbn0iXSwic291cmNlUm9vdCI6IiJ9 */"]
 });
 
 /***/ }),
@@ -1323,25 +1329,23 @@ class HealingPotions {
 
 /***/ }),
 
-/***/ 4345:
-/*!***************************************************!*\
-  !*** ./src/app/ng-material/ng-material.module.ts ***!
-  \***************************************************/
+/***/ 4574:
+/*!***************************************!*\
+  !*** ./src/app/ng-material.module.ts ***!
+  \***************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NgMaterialModule": () => (/* binding */ NgMaterialModule)
 /* harmony export */ });
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ 4666);
-/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/button */ 4522);
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/icon */ 7822);
-/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/divider */ 1528);
-/* harmony import */ var _angular_material_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/list */ 6517);
-/* harmony import */ var _tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tabs/tabs.component */ 2887);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
-
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/button */ 4522);
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/icon */ 7822);
+/* harmony import */ var _angular_material_divider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/divider */ 1528);
+/* harmony import */ var _angular_material_list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/list */ 6517);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
 
@@ -1353,49 +1357,18 @@ class NgMaterialModule {}
 NgMaterialModule.ɵfac = function NgMaterialModule_Factory(t) {
   return new (t || NgMaterialModule)();
 };
-NgMaterialModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({
+NgMaterialModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
   type: NgMaterialModule
 });
-NgMaterialModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({
-  imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule]
+NgMaterialModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
+  imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_2__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_3__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_5__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButtonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_2__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_3__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_5__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButtonModule]
 });
 (function () {
-  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](NgMaterialModule, {
-    declarations: [_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__.TabsComponent],
-    imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule],
-    exports: [_angular_material_tabs__WEBPACK_IMPORTED_MODULE_3__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_4__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_5__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_6__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_7__.MatButtonModule, _tabs_tabs_component__WEBPACK_IMPORTED_MODULE_0__.TabsComponent]
+  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](NgMaterialModule, {
+    imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__.CommonModule, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_2__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_3__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_5__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButtonModule],
+    exports: [_angular_material_tabs__WEBPACK_IMPORTED_MODULE_2__.MatTabsModule, _angular_material_divider__WEBPACK_IMPORTED_MODULE_3__.MatDividerModule, _angular_material_icon__WEBPACK_IMPORTED_MODULE_4__.MatIconModule, _angular_material_list__WEBPACK_IMPORTED_MODULE_5__.MatListModule, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButtonModule]
   });
 })();
-
-/***/ }),
-
-/***/ 2887:
-/*!****************************************************!*\
-  !*** ./src/app/ng-material/tabs/tabs.component.ts ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TabsComponent": () => (/* binding */ TabsComponent)
-/* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2560);
-
-class TabsComponent {
-  constructor() {}
-  ngOnInit() {}
-}
-TabsComponent.ɵfac = function TabsComponent_Factory(t) {
-  return new (t || TabsComponent)();
-};
-TabsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
-  type: TabsComponent,
-  selectors: [["app-tabs"]],
-  decls: 0,
-  vars: 0,
-  template: function TabsComponent_Template(rf, ctx) {},
-  styles: ["\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */"]
-});
 
 /***/ }),
 
