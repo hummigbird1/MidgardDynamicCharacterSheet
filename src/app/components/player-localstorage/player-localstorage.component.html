@@ -1,4 +1,4 @@
-<button (click)="loadPlayerFromStorage($event)">Load</button>
-<button (click)="savePlayerToStorage($event)">Save</button>
-<button (click)="deletePlayerFromStorage($event)">Delete</button>
+<button mat-raised-button (click)="loadPlayerFromStorage($event)">Load</button>
+<button mat-raised-button (click)="savePlayerToStorage($event)">Save</button>
+<button mat-raised-button color="warn" (click)="deletePlayerFromStorage($event)">Delete</button>
 <label>{{ actionResult }}</label>
