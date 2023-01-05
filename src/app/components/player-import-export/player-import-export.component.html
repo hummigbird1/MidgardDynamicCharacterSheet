@@ -1,8 +1,11 @@
-<label>
-    Spieler JSON:
-    <textarea [(ngModel)]="jsonContent"></textarea>
-
-</label>
-<button (click)="importPlayer($event)">Import</button>
-<button (click)="exportPlayer($event)">Export</button>
-<label>{{ actionResult }}</label>
+<div class="action-area">
+    <button mat-raised-button (click)="importPlayer($event)">Import</button>
+    <button mat-raised-button (click)="exportPlayer($event)">Export</button>
+    <label>{{ actionResult }}</label>
+</div>
+<div class="data-area">
+    <label>
+        Spieler JSON:
+        <textarea class="data-text" [(ngModel)]="jsonContent"></textarea>
+    </label>
+</div>

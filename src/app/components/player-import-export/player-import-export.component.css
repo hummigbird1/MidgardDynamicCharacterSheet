@@ -1,0 +1,14 @@
+button {
+    margin: 2px 5px;
+}
+
+.data-area {
+    width: 800px;
+    height: 600px;
+    margin: 5px;
+}
+
+.data-text {
+    width: 99%;
+    height: 95%;
+}

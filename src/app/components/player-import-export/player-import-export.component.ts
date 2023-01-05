@@ -11,7 +11,7 @@ export class PlayerImportExportComponent implements OnInit {
   constructor(private playerModelProviderService: PlayerModelProviderService) { }
 
   actionResult: string | null = null;
-  jsonContent: string | undefined;
+  jsonContent: string = '';
   ngOnInit(): void {
   }
 
@@ -20,8 +20,8 @@ export class PlayerImportExportComponent implements OnInit {
   }
 
   importPlayer(event: Event): void {
-    if (this.jsonContent === undefined) {
-      this.actionResult = "Nothing to import. Paste a character json into the text area"
+    if (this.jsonContent === undefined || this.jsonContent == '') {
+      this.actionResult = "Nothing to import. Paste a character json into the text area!"
       return;
     }
     this.setPlayerFromJson(this.jsonContent);
