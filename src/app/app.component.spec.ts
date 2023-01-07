@@ -20,10 +20,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'MidgardDynamicCharacterSheet'`, () => {
+  it(`should have as title 'Midgard Dynamic Character Sheet'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('MidgardDynamicCharacterSheet');
+    expect(app.title).toEqual('Midgard Dynamic Character Sheet');
   });
 
   it('should render title', () => {

@@ -1,4 +1,11 @@
 <h1>Midgard Dynamic Character Sheet</h1>
+<div class="basic-character-block">
+  <app-basic-character-stats [(player)]="player"></app-basic-character-stats>
+  <label>
+    Edit Character: 
+    <input type="checkbox" [(ngModel)]="editMode">
+  </label>
+</div>
 <mat-tab-group>
   <mat-tab label="Character">
     <app-character-sheet [(player)]="player"></app-character-sheet>
@@ -12,7 +19,8 @@
     <app-numeric-value-handler label='AP' [baseValue]='12' [minValue]="0" [maxValue]="12"></app-numeric-value-handler>
     <br />
     Beispiel - Numerische EIngabe ohne Reset:<br />
-    <app-numeric-value-handler label='BB' [baseValue]='500' [showReset]='false' [minValue]="0" [maxValue]="99999999"></app-numeric-value-handler>
+    <app-numeric-value-handler label='BB' [baseValue]='500' [showReset]='false' [minValue]="0"
+      [maxValue]="99999999"></app-numeric-value-handler>
   </mat-tab>
   <mat-tab label="Zauber"> Hier könnten die Zaubersprüche stehen </mat-tab>
   <mat-tab label="Beschwörungen"> Hier könnten die Beschwörungen stehen</mat-tab>
