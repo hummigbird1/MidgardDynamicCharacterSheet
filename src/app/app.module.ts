@@ -15,6 +15,7 @@ import { PlayerLocalstorageComponent } from './components/player-localstorage/pl
 import { BasicCharacterStatsComponent } from './components/basic-character-stats/basic-character-stats.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StatValueComponent } from './components/primitives/stat-value/stat-value.component';
+import { TextStatValueComponent } from './components/primitives/text-stat-value/text-stat-value.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { StatValueComponent } from './components/primitives/stat-value/stat-valu
     PlayerLocalstorageComponent,
     BasicCharacterStatsComponent,
     StatValueComponent,
+    TextStatValueComponent,
   ],
   imports: [
     BrowserModule,

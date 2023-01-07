@@ -1,0 +1,8 @@
+<label> {{ label }}
+    <input *ngIf="!multiline" [readOnly]="!editMode" type="text" [(ngModel)]="value" [class.editable-value]="editMode"
+        [class.readonly-value]="!editMode"
+        (ngModelChange)="onModelChange($event)">
+    <textarea *ngIf="multiline" [readOnly]="!editMode" [(ngModel)]="value" [class.editable-value]="editMode"
+        [class.readonly-value]="!editMode"
+        (ngModelChange)="onModelChange($event)"></textarea>
+</label>
