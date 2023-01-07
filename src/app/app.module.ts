@@ -12,6 +12,7 @@ import { PlayerImportExportComponent } from './components/player-import-export/p
 import { PlayerModelProviderService } from './services/player-model-provider.service';
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
 import { PlayerLocalstorageComponent } from './components/player-localstorage/player-localstorage.component';
+import { BasicCharacterStatsComponent } from './components/basic-character-stats/basic-character-stats.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PlayerLocalstorageComponent } from './components/player-localstorage/pl
     PlayerImportExportComponent,
     CharacterSheetComponent,
     PlayerLocalstorageComponent,
+    BasicCharacterStatsComponent,
   ],
   imports: [
     BrowserModule,
