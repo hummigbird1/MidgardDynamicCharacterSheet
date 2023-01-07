@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DiceRollerService } from 'src/app/services/dice-roller.service';
-import { PlayerModeProviderService } from 'src/app/services/player-mode-provider.service';
 
 @Component({
   selector: 'app-stat-value',

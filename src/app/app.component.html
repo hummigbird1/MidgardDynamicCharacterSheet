@@ -8,7 +8,7 @@
 </div>
 <mat-tab-group>
   <mat-tab label="Character">
-    <app-character-sheet [(player)]="player"></app-character-sheet>
+    <app-character-sheet [(player)]="player" [editMode]="editMode"></app-character-sheet>
   </mat-tab>
   <mat-tab label="Abenteuer Tagesbogen">
     <app-adventure-sheet [(player)]="player"></app-adventure-sheet>

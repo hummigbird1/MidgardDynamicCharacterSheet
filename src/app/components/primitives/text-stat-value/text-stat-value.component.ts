@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PlayerModeProviderService } from 'src/app/services/player-mode-provider.service';
 
 @Component({
   selector: 'app-text-stat-value',
