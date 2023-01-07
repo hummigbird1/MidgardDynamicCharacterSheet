@@ -46,16 +46,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./services/player-model-provider.service */ 3889);
 /* harmony import */ var _services_player_localstorage_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/player-localstorage.service */ 6297);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ 124);
-/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
-/* harmony import */ var _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/numeric-value-handler/numeric-value-handler.component */ 446);
-/* harmony import */ var _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/adventure-sheet/adventure-sheet.component */ 1525);
-/* harmony import */ var _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/player-import-export/player-import-export.component */ 4706);
-/* harmony import */ var _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/character-sheet/character-sheet.component */ 5419);
-/* harmony import */ var _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/player-localstorage/player-localstorage.component */ 3824);
+/* harmony import */ var _services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/player-mode-provider.service */ 5400);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ 124);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/tabs */ 5892);
+/* harmony import */ var _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/numeric-value-handler/numeric-value-handler.component */ 446);
+/* harmony import */ var _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/adventure-sheet/adventure-sheet.component */ 1525);
+/* harmony import */ var _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/player-import-export/player-import-export.component */ 4706);
+/* harmony import */ var _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/character-sheet/character-sheet.component */ 5419);
+/* harmony import */ var _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/player-localstorage/player-localstorage.component */ 3824);
+/* harmony import */ var _components_basic_character_stats_basic_character_stats_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/basic-character-stats/basic-character-stats.component */ 1675);
+
+
+
+
 
 
 
@@ -67,15 +75,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class AppComponent {
-  constructor(pmps, plss) {
+  constructor(pmps, plss, pmodeps, titleService) {
     this.pmps = pmps;
     this.plss = plss;
-    this.title = 'MidgardDynamicCharacterSheet';
+    this.pmodeps = pmodeps;
+    this.titleService = titleService;
+    this.title = 'Midgard Dynamic Character Sheet';
   }
   ngAfterViewInit() {
     const playerFromStorage = this.plss.loadPlayer();
     if (playerFromStorage != null) {
       this.pmps.player = playerFromStorage;
+      this.titleService.setTitle(playerFromStorage.name + ' - Midgard Dynamic Character Sheet');
     }
   }
   get player() {
@@ -83,66 +94,89 @@ class AppComponent {
   }
   set player(p) {
     this.pmps.player = p;
+    this.titleService.setTitle(p.name + ' - Midgard Dynamic Character Sheet');
+  }
+  get editMode() {
+    return this.pmodeps.editMode;
+  }
+  set editMode(b) {
+    this.pmodeps.editMode = b;
   }
 }
 AppComponent.ɵfac = function AppComponent_Factory(t) {
-  return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__.PlayerModelProviderService), _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdirectiveInject"](_services_player_localstorage_service__WEBPACK_IMPORTED_MODULE_1__.PlayerLocalstorageService));
+  return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdirectiveInject"](_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_0__.PlayerModelProviderService), _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdirectiveInject"](_services_player_localstorage_service__WEBPACK_IMPORTED_MODULE_1__.PlayerLocalstorageService), _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdirectiveInject"](_services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_2__.PlayerModeProviderService), _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdirectiveInject"](_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.Title));
 };
-AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineComponent"]({
+AppComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineComponent"]({
   type: AppComponent,
   selectors: [["app-root"]],
-  decls: 24,
-  vars: 12,
-  consts: [["label", "Character"], [3, "player", "playerChange"], ["label", "Abenteuer Tagesbogen"], ["label", "UI Element Beispiel / Demo"], ["label", "HP", 3, "baseValue", "minValue", "maxValue"], ["label", "AP", 3, "baseValue", "minValue", "maxValue"], ["label", "BB", 3, "baseValue", "showReset", "minValue", "maxValue"], ["label", "Zauber"], ["label", "Beschw\u00F6rungen"], ["label", "Player Storage"], ["label", "Player Import/Export"]],
+  decls: 29,
+  vars: 14,
+  consts: [[1, "basic-character-block"], [3, "player", "playerChange"], ["type", "checkbox", 3, "ngModel", "ngModelChange"], ["label", "Character"], ["label", "Abenteuer Tagesbogen"], ["label", "UI Element Beispiel / Demo"], ["label", "HP", 3, "baseValue", "minValue", "maxValue"], ["label", "AP", 3, "baseValue", "minValue", "maxValue"], ["label", "BB", 3, "baseValue", "showReset", "minValue", "maxValue"], ["label", "Zauber"], ["label", "Beschw\u00F6rungen"], ["label", "Player Storage"], ["label", "Player Import/Export"]],
   template: function AppComponent_Template(rf, ctx) {
     if (rf & 1) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](0, "h1");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](1, "Midgard Dynamic Character Sheet");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](2, "mat-tab-group")(3, "mat-tab", 0)(4, "app-character-sheet", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("playerChange", function AppComponent_Template_app_character_sheet_playerChange_4_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](0, "h1");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](1, "Midgard Dynamic Character Sheet");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](2, "div", 0)(3, "app-basic-character-stats", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("playerChange", function AppComponent_Template_app_basic_character_stats_playerChange_3_listener($event) {
         return ctx.player = $event;
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](5, "mat-tab", 2)(6, "app-adventure-sheet", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵlistener"]("playerChange", function AppComponent_Template_app_adventure_sheet_playerChange_6_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](4, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](5, " Edit Character: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](6, "input", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("ngModelChange", function AppComponent_Template_input_ngModelChange_6_listener($event) {
+        return ctx.editMode = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](7, "mat-tab-group")(8, "mat-tab", 3)(9, "app-character-sheet", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("playerChange", function AppComponent_Template_app_character_sheet_playerChange_9_listener($event) {
         return ctx.player = $event;
       });
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](7, "mat-tab", 3);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](8, "app-numeric-value-handler", 4)(9, "br")(10, "app-numeric-value-handler", 5)(11, "br");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](12, " Beispiel - Numerische EIngabe ohne Reset:");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](13, "br")(14, "app-numeric-value-handler", 6);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](15, "mat-tab", 7);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](16, " Hier k\u00F6nnten die Zauberspr\u00FCche stehen ");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](17, "mat-tab", 8);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵtext"](18, " Hier k\u00F6nnten die Beschw\u00F6rungen stehen");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](19, "mat-tab", 9);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](20, "app-player-localstorage");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementStart"](21, "mat-tab", 10);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](22, "app-player-import-export");
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelementEnd"]()();
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵelement"](23, "router-outlet");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](10, "mat-tab", 4)(11, "app-adventure-sheet", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵlistener"]("playerChange", function AppComponent_Template_app_adventure_sheet_playerChange_11_listener($event) {
+        return ctx.player = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](12, "mat-tab", 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](13, "app-numeric-value-handler", 6)(14, "br")(15, "app-numeric-value-handler", 7)(16, "br");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](17, " Beispiel - Numerische EIngabe ohne Reset:");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](18, "br")(19, "app-numeric-value-handler", 8);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](20, "mat-tab", 9);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](21, " Hier k\u00F6nnten die Zauberspr\u00FCche stehen ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](22, "mat-tab", 10);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵtext"](23, " Hier k\u00F6nnten die Beschw\u00F6rungen stehen");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](24, "mat-tab", 11);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](25, "app-player-localstorage");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementStart"](26, "mat-tab", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](27, "app-player-import-export");
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵelement"](28, "router-outlet");
     }
     if (rf & 2) {
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("player", ctx.player);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("player", ctx.player);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("baseValue", 30)("minValue", 0)("maxValue", 30);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("baseValue", 12)("minValue", 0)("maxValue", 12);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵadvance"](4);
-      _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵproperty"]("baseValue", 500)("showReset", false)("minValue", 0)("maxValue", 99999999);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("player", ctx.player);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("ngModel", ctx.editMode);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("player", ctx.player);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("player", ctx.player);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("baseValue", 30)("minValue", 0)("maxValue", 30);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("baseValue", 12)("minValue", 0)("maxValue", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵproperty"]("baseValue", 500)("showReset", false)("minValue", 0)("maxValue", 99999999);
     }
   },
-  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_8__.RouterOutlet, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__.MatTab, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_9__.MatTabGroup, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_3__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_4__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_5__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_6__.PlayerLocalstorageComponent],
-  styles: ["app-numeric-value-handler[_ngcontent-%COMP%] {\n  margin: 20px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0FBQ2QiLCJzb3VyY2VzQ29udGVudCI6WyJhcHAtbnVtZXJpYy12YWx1ZS1oYW5kbGVyIHtcbiAgbWFyZ2luOiAyMHB4O1xufSJdLCJzb3VyY2VSb290IjoiIn0= */"]
+  dependencies: [_angular_router__WEBPACK_IMPORTED_MODULE_11__.RouterOutlet, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.CheckboxControlValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_12__.NgModel, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_13__.MatTab, _angular_material_tabs__WEBPACK_IMPORTED_MODULE_13__.MatTabGroup, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_3__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_6__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_7__.PlayerLocalstorageComponent, _components_basic_character_stats_basic_character_stats_component__WEBPACK_IMPORTED_MODULE_8__.BasicCharacterStatsComponent],
+  styles: ["app-numeric-value-handler[_ngcontent-%COMP%] {\n  margin: 20px;\n}\n\n.basic-character-block[_ngcontent-%COMP%] {\n  width: 500px;\n  height: 100px;\n  margin: 10px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxZQUFZO0VBQ1osYUFBYTtFQUNiLFlBQVk7QUFDZCIsInNvdXJjZXNDb250ZW50IjpbImFwcC1udW1lcmljLXZhbHVlLWhhbmRsZXIge1xuICBtYXJnaW46IDIwcHg7XG59XG5cbi5iYXNpYy1jaGFyYWN0ZXItYmxvY2sge1xuICB3aWR0aDogNTAwcHg7XG4gIGhlaWdodDogMTAwcHg7XG4gIG1hcmdpbjogMTBweDtcbn0iXSwic291cmNlUm9vdCI6IiJ9 */"]
 });
 
 /***/ }),
@@ -157,19 +191,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser */ 4497);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ 2508);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 158);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 5041);
 /* harmony import */ var _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/numeric-value-handler/numeric-value-handler.component */ 446);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/platform-browser/animations */ 7146);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/platform-browser/animations */ 7146);
 /* harmony import */ var _ng_material_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ng-material.module */ 4574);
 /* harmony import */ var _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/adventure-sheet/adventure-sheet.component */ 1525);
 /* harmony import */ var _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/player-import-export/player-import-export.component */ 4706);
 /* harmony import */ var _services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/player-model-provider.service */ 3889);
 /* harmony import */ var _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/character-sheet/character-sheet.component */ 5419);
 /* harmony import */ var _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/player-localstorage/player-localstorage.component */ 3824);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _components_basic_character_stats_basic_character_stats_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/basic-character-stats/basic-character-stats.component */ 1675);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/common/http */ 8987);
+/* harmony import */ var _components_primitives_stat_value_stat_value_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/primitives/stat-value/stat-value.component */ 5282);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/core */ 2560);
+
+
+
 
 
 
@@ -187,18 +227,18 @@ class AppModule {}
 AppModule.ɵfac = function AppModule_Factory(t) {
   return new (t || AppModule)();
 };
-AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineNgModule"]({
+AppModule.ɵmod = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefineNgModule"]({
   type: AppModule,
   bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent]
 });
-AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({
+AppModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵdefineInjector"]({
   providers: [_services_player_model_provider_service__WEBPACK_IMPORTED_MODULE_6__.PlayerModelProviderService],
-  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
+  imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_14__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_15__.HttpClientModule]
 });
 (function () {
-  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](AppModule, {
-    declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_7__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_8__.PlayerLocalstorageComponent],
-    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_11__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_12__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule]
+  (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_11__["ɵɵsetNgModuleScope"](AppModule, {
+    declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent, _components_numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_2__.NumericValueHandlerComponent, _components_adventure_sheet_adventure_sheet_component__WEBPACK_IMPORTED_MODULE_4__.AdventureSheetComponent, _components_player_import_export_player_import_export_component__WEBPACK_IMPORTED_MODULE_5__.PlayerImportExportComponent, _components_character_sheet_character_sheet_component__WEBPACK_IMPORTED_MODULE_7__.CharacterSheetComponent, _components_player_localstorage_player_localstorage_component__WEBPACK_IMPORTED_MODULE_8__.PlayerLocalstorageComponent, _components_basic_character_stats_basic_character_stats_component__WEBPACK_IMPORTED_MODULE_9__.BasicCharacterStatsComponent, _components_primitives_stat_value_stat_value_component__WEBPACK_IMPORTED_MODULE_10__.StatValueComponent],
+    imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_12__.BrowserModule, _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule, _angular_forms__WEBPACK_IMPORTED_MODULE_13__.FormsModule, _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_14__.BrowserAnimationsModule, _ng_material_module__WEBPACK_IMPORTED_MODULE_3__.NgMaterialModule, _angular_common_http__WEBPACK_IMPORTED_MODULE_15__.HttpClientModule]
   });
 })();
 
@@ -423,15 +463,15 @@ AdventureSheetComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MOD
 
 /***/ }),
 
-/***/ 5419:
-/*!*************************************************************************!*\
-  !*** ./src/app/components/character-sheet/character-sheet.component.ts ***!
-  \*************************************************************************/
+/***/ 1675:
+/*!*************************************************************************************!*\
+  !*** ./src/app/components/basic-character-stats/basic-character-stats.component.ts ***!
+  \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "CharacterSheetComponent": () => (/* binding */ CharacterSheetComponent)
+/* harmony export */   "BasicCharacterStatsComponent": () => (/* binding */ BasicCharacterStatsComponent)
 /* harmony export */ });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2560);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ 2508);
@@ -440,18 +480,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class CharacterSheetComponent {
+class BasicCharacterStatsComponent {
   constructor() {
     this.playerChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__.EventEmitter();
   }
   ngOnInit() {}
 }
-CharacterSheetComponent.ɵfac = function CharacterSheetComponent_Factory(t) {
-  return new (t || CharacterSheetComponent)();
+BasicCharacterStatsComponent.ɵfac = function BasicCharacterStatsComponent_Factory(t) {
+  return new (t || BasicCharacterStatsComponent)();
 };
-CharacterSheetComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
-  type: CharacterSheetComponent,
-  selectors: [["app-character-sheet"]],
+BasicCharacterStatsComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({
+  type: BasicCharacterStatsComponent,
+  selectors: [["app-basic-character-stats"]],
   inputs: {
     player: "player"
   },
@@ -461,24 +501,24 @@ CharacterSheetComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MOD
   decls: 7,
   vars: 9,
   consts: [[3, "ngModel", "ngModelChange"], ["label", "HP", 3, "currentValue", "baseValue", "minValue", "maxValue", "currentValueChange"], ["label", "AP", 3, "currentValue", "baseValue", "minValue", "maxValue", "currentValueChange"]],
-  template: function CharacterSheetComponent_Template(rf, ctx) {
+  template: function BasicCharacterStatsComponent_Template(rf, ctx) {
     if (rf & 1) {
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "label");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " Name ");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "input", 0);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_2_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function BasicCharacterStatsComponent_Template_input_ngModelChange_2_listener($event) {
         return ctx.player.name = $event;
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]()();
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](3, "br");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](4, "app-numeric-value-handler", 1);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("currentValueChange", function CharacterSheetComponent_Template_app_numeric_value_handler_currentValueChange_4_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("currentValueChange", function BasicCharacterStatsComponent_Template_app_numeric_value_handler_currentValueChange_4_listener($event) {
         return ctx.player.stats.current.hitPoints = $event;
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](5, "br");
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](6, "app-numeric-value-handler", 2);
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("currentValueChange", function CharacterSheetComponent_Template_app_numeric_value_handler_currentValueChange_6_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("currentValueChange", function BasicCharacterStatsComponent_Template_app_numeric_value_handler_currentValueChange_6_listener($event) {
         return ctx.player.stats.current.staminaPoints = $event;
       });
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -494,6 +534,369 @@ CharacterSheetComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MOD
   },
   dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_2__.NgModel, _numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_0__.NumericValueHandlerComponent],
   styles: ["\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsInNvdXJjZVJvb3QiOiIifQ== */"]
+});
+
+/***/ }),
+
+/***/ 5419:
+/*!*************************************************************************!*\
+  !*** ./src/app/components/character-sheet/character-sheet.component.ts ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CharacterSheetComponent": () => (/* binding */ CharacterSheetComponent)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var src_app_services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/player-mode-provider.service */ 5400);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 2508);
+/* harmony import */ var _numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../numeric-value-handler/numeric-value-handler.component */ 446);
+/* harmony import */ var _primitives_stat_value_stat_value_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../primitives/stat-value/stat-value.component */ 5282);
+
+
+
+
+
+
+class CharacterSheetComponent {
+  constructor(pmodeps) {
+    this.pmodeps = pmodeps;
+    this.playerChange = new _angular_core__WEBPACK_IMPORTED_MODULE_3__.EventEmitter();
+  }
+  ngOnInit() {}
+}
+CharacterSheetComponent.ɵfac = function CharacterSheetComponent_Factory(t) {
+  return new (t || CharacterSheetComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](src_app_services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_0__.PlayerModeProviderService));
+};
+CharacterSheetComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({
+  type: CharacterSheetComponent,
+  selectors: [["app-character-sheet"]],
+  inputs: {
+    player: "player"
+  },
+  outputs: {
+    playerChange: "playerChange"
+  },
+  decls: 142,
+  vars: 58,
+  consts: [[1, "attributes-block"], ["label", "ST", 3, "value", "diceSides", "valueChange"], ["label", "GE", 3, "value", "diceSides", "valueChange"], ["label", "KO", 3, "value", "diceSides", "valueChange"], ["label", "IN", 3, "value", "diceSides", "valueChange"], ["label", "ZT", 3, "value", "diceSides", "valueChange"], ["label", "AU", 3, "value", "diceSides", "valueChange"], ["label", "PA", 3, "value", "diceSides", "valueChange"], ["label", "SB", 3, "value", "diceSides", "valueChange"], ["label", "HGW", 3, "value", "diceSides", "valueChange"], ["label", "KAW", 3, "value", "diceSides", "valueChange"], ["label", "RW", 3, "value", "diceSides", "valueChange"], ["type", "number", 3, "ngModel", "ngModelChange"], [1, "bonus-block"], ["type", "number", 3, "ngModel", "readOnly", "ngModelChange"], [1, "defense-block"], ["rowspan", "3"], [3, "ngModel", "ngModelChange"], [1, "experience-block"], ["colspan", "3"], ["label", "GS:", 3, "minValue", "maxValue", "showReset", "currentValue", "currentValueChange"], ["label", "SS:", 3, "minValue", "maxValue", "showReset", "currentValue", "currentValueChange"], ["label", "KS:", 3, "minValue", "maxValue", "showReset", "currentValue", "currentValueChange"]],
+  template: function CharacterSheetComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0)(1, "table")(2, "tr")(3, "td")(4, "app-stat-value", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_4_listener($event) {
+        return ctx.player.attributes.strength = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](5, "td")(6, "app-stat-value", 2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_6_listener($event) {
+        return ctx.player.attributes.agility = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](7, "td")(8, "app-stat-value", 3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_8_listener($event) {
+        return ctx.player.attributes.constitution = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](9, "td")(10, "app-stat-value", 4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_10_listener($event) {
+        return ctx.player.attributes.intelligence = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](11, "td")(12, "app-stat-value", 5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_12_listener($event) {
+        return ctx.player.attributes.magicAffinity = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](13, "tr")(14, "td")(15, "app-stat-value", 6);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_15_listener($event) {
+        return ctx.player.attributes.looks = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](16, "td")(17, "app-stat-value", 7);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_17_listener($event) {
+        return ctx.player.attributes.charisma = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](18, "td")(19, "app-stat-value", 8);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_19_listener($event) {
+        return ctx.player.attributes.selfControl = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](20, "td")(21, "app-stat-value", 9);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_21_listener($event) {
+        return ctx.player.attributes.closeQuarterCombatAffinity = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](22, "td")(23, "app-stat-value", 10);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_23_listener($event) {
+        return ctx.player.attributes.showOfStrengthAffinitiy = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](24, "tr")(25, "td")(26, "app-stat-value", 11);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("valueChange", function CharacterSheetComponent_Template_app_stat_value_valueChange_26_listener($event) {
+        return ctx.player.attributes.reaction = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](27, "td")(28, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](29, "B: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](30, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_30_listener($event) {
+        return ctx.player.attributes.movement = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](31, "td")(32, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](33, "WLW: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](34, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_34_listener($event) {
+        return ctx.player.attributes.revivalAffinitiy = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](35, "td")(36, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](37, "LP-Basis: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](38, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_38_listener($event) {
+        return ctx.player.attributes.hitPointsBase = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](39, "td")(40, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](41, "GiT: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](42, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_42_listener($event) {
+        return ctx.player.attributes.poisonResistance = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](43, "div", 13)(44, "table")(45, "tr")(46, "td");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](47, "pers\u00F6nlicher Bonus ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](48, "td")(49, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](50, "Ausdauer: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](51, "input", 14);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_51_listener($event) {
+        return ctx.player.bonusStats.stamina = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](52, "td")(53, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](54, "Zaubern: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](55, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_55_listener($event) {
+        return ctx.player.bonusStats.magic = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](56, "tr")(57, "td")(58, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](59, "Angriff: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](60, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_60_listener($event) {
+        return ctx.player.bonusStats.attack = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](61, "td")(62, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](63, "Schaden: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](64, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_64_listener($event) {
+        return ctx.player.bonusStats.damage = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](65, "td")(66, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](67, "Abwehr: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](68, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_68_listener($event) {
+        return ctx.player.bonusStats.defense = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](69, "tr")(70, "td")(71, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](72, "psy.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](73, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_73_listener($event) {
+        return ctx.player.bonusStats.magicResistance.psychologic = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](74, "td")(75, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](76, "phs.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](77, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_77_listener($event) {
+        return ctx.player.bonusStats.magicResistance.physical = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](78, "td")(79, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](80, "phk.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](81, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_81_listener($event) {
+        return ctx.player.bonusStats.magicResistance.environmental = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](82, "div", 15)(83, "table")(84, "tr")(85, "td", 16)(86, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](87, " R\u00FCstung: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](88, "textarea", 17);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_textarea_ngModelChange_88_listener($event) {
+        return ctx.player.defenseStats.armorDescription = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](89, "td")(90, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](91, "RK: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](92, "input", 17);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_92_listener($event) {
+        return ctx.player.defenseStats.armorClass = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](93, "td")(94, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](95, "psy.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](96, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_96_listener($event) {
+        return ctx.player.defenseStats.magicResistance.psychologic = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](97, "tr")(98, "td")(99, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](100, "LPV: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](101, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_101_listener($event) {
+        return ctx.player.defenseStats.hitPointLossValue = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](102, "td")(103, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](104, "phs.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](105, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_105_listener($event) {
+        return ctx.player.defenseStats.magicResistance.physical = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](106, "tr")(107, "td")(108, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](109, "Abwehr: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](110, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_110_listener($event) {
+        return ctx.player.defenseStats.defense = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](111, "td")(112, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](113, "phk.ZR: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](114, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_114_listener($event) {
+        return ctx.player.defenseStats.magicResistance.environmental = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](115, "div", 18)(116, "table")(117, "tr")(118, "td", 19)(119, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](120, "GFP: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](121, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_121_listener($event) {
+        return ctx.player.experience.total = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](122, "tr")(123, "td")(124, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](125, "AEP: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](126, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_126_listener($event) {
+        return ctx.player.experience.common = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](127, "td")(128, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](129, "KEP: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](130, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_130_listener($event) {
+        return ctx.player.experience.battle = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](131, "td")(132, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](133, "ZEP: ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](134, "input", 12);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("ngModelChange", function CharacterSheetComponent_Template_input_ngModelChange_134_listener($event) {
+        return ctx.player.experience.magic = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](135, "tr")(136, "td")(137, "app-numeric-value-handler", 20);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("currentValueChange", function CharacterSheetComponent_Template_app_numeric_value_handler_currentValueChange_137_listener($event) {
+        return ctx.player.currencies.coins.gold = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](138, "td")(139, "app-numeric-value-handler", 21);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("currentValueChange", function CharacterSheetComponent_Template_app_numeric_value_handler_currentValueChange_139_listener($event) {
+        return ctx.player.currencies.coins.silver = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()();
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](140, "td")(141, "app-numeric-value-handler", 22);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵlistener"]("currentValueChange", function CharacterSheetComponent_Template_app_numeric_value_handler_currentValueChange_141_listener($event) {
+        return ctx.player.currencies.coins.copper = $event;
+      });
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]()()()()();
+    }
+    if (rf & 2) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.strength)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.agility)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.constitution)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.intelligence)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.magicAffinity)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.looks)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.charisma)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.selfControl)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.closeQuarterCombatAffinity)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.showOfStrengthAffinitiy)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("value", ctx.player.attributes.reaction)("diceSides", 100);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.attributes.movement);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.attributes.revivalAffinitiy);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.attributes.hitPointsBase);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.attributes.poisonResistance);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](9);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.stamina)("readOnly", !ctx.pmodeps.editMode);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.magic);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.attack);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.damage);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.defense);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.magicResistance.psychologic);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.magicResistance.physical);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.bonusStats.magicResistance.environmental);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](7);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.armorDescription);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.armorClass);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.magicResistance.psychologic);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.hitPointLossValue);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.magicResistance.physical);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.defense);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.defenseStats.magicResistance.environmental);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](7);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.experience.total);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.experience.common);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.experience.battle);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngModel", ctx.player.experience.magic);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](3);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("minValue", 0)("maxValue", 99999999999)("showReset", false)("currentValue", ctx.player.currencies.coins.gold);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("minValue", 0)("maxValue", 99999999999)("showReset", false)("currentValue", ctx.player.currencies.coins.silver);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
+      _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("minValue", 0)("maxValue", 99999999999)("showReset", false)("currentValue", ctx.player.currencies.coins.copper);
+    }
+  },
+  dependencies: [_angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NumberValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgModel, _numeric_value_handler_numeric_value_handler_component__WEBPACK_IMPORTED_MODULE_1__.NumericValueHandlerComponent, _primitives_stat_value_stat_value_component__WEBPACK_IMPORTED_MODULE_2__.StatValueComponent],
+  styles: [".readonly-value[_ngcontent-%COMP%] {\n    width: 50px;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29tcG9uZW50cy9jaGFyYWN0ZXItc2hlZXQvY2hhcmFjdGVyLXNoZWV0LmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0FBQ2YiLCJzb3VyY2VzQ29udGVudCI6WyIucmVhZG9ubHktdmFsdWUge1xuICAgIHdpZHRoOiA1MHB4O1xufVxuIl0sInNvdXJjZVJvb3QiOiIifQ== */"]
 });
 
 /***/ }),
@@ -1020,6 +1423,200 @@ PlayerLocalstorageComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED
 
 /***/ }),
 
+/***/ 5282:
+/*!**************************************************************************!*\
+  !*** ./src/app/components/primitives/stat-value/stat-value.component.ts ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "StatValueComponent": () => (/* binding */ StatValueComponent)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var src_app_services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/services/player-mode-provider.service */ 5400);
+/* harmony import */ var src_app_services_dice_roller_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! src/app/services/dice-roller.service */ 7617);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ 4666);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ 2508);
+
+
+
+
+
+
+function StatValueComponent_input_2_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "input", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("ngModelChange", function StatValueComponent_input_2_Template_input_ngModelChange_0_listener($event) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r3);
+      const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵresetView"](ctx_r2.value = $event);
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx_r0.value);
+  }
+}
+function StatValueComponent_span_3_span_5_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate2"](" Warte auf ", ctx_r4.noOfDice, "d", ctx_r4.diceSides, " ");
+  }
+}
+function StatValueComponent_span_3_span_6_label_1_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "label", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r6.rollResult, " Pr\u00FCfwurf geschafft :)");
+  }
+}
+function StatValueComponent_span_3_span_6_label_2_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "label", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"]("", ctx_r7.rollResult, " Pr\u00FCfwurf fehlgeschlagen :(");
+  }
+}
+function StatValueComponent_span_3_span_6_Template(rf, ctx) {
+  if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, StatValueComponent_span_3_span_6_label_1_Template, 2, 1, "label", 5);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, StatValueComponent_span_3_span_6_label_2_Template, 2, 1, "label", 6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx_r5.valueCheckSuccessful);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", !ctx_r5.valueCheckSuccessful);
+  }
+}
+function StatValueComponent_span_3_Template(rf, ctx) {
+  if (rf & 1) {
+    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](1, "input", 3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "button", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("click", function StatValueComponent_span_3_Template_button_click_2_listener() {
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵrestoreView"](_r9);
+      const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
+      return _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵresetView"](ctx_r8.onClick());
+    });
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](3, " Pr\u00FCfwurf ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](4, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](5, StatValueComponent_span_3_span_5_Template, 2, 2, "span", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](6, StatValueComponent_span_3_span_6_Template, 3, 2, "span", 1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+  }
+  if (rf & 2) {
+    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx_r1.value);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("disabled", !ctx_r1.canRoll);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", !ctx_r1.rollResultAvailable && !ctx_r1.canRoll);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx_r1.rollResultAvailable);
+  }
+}
+class StatValueComponent {
+  constructor(pmodeps, diceRollerService) {
+    this.pmodeps = pmodeps;
+    this.diceRollerService = diceRollerService;
+    this.label = '';
+    this.value = 0;
+    this.valueChange = new _angular_core__WEBPACK_IMPORTED_MODULE_2__.EventEmitter();
+    this.noOfDice = 1;
+    this.diceSides = 100;
+    this.canRoll = true;
+    this.rollResultAvailable = false;
+    this.valueCheckSuccessful = false;
+    this.rollResult = 0;
+  }
+  onClick() {
+    this.canRoll = false;
+    this.diceRollerService.rollDice(this.noOfDice, this.diceSides).subscribe(x => this.evaluateDiceRollResult(this.value, x.result));
+  }
+  evaluateDiceRollResult(val, diceRollResult) {
+    this.rollResult = diceRollResult;
+    if (diceRollResult <= val) {
+      this.valueCheckSuccessful = true;
+    } else {
+      this.valueCheckSuccessful = false;
+    }
+    this.rollResultAvailable = true;
+    setTimeout(() => {
+      this.resetRollability();
+    }, 10000);
+  }
+  resetRollability() {
+    this.canRoll = true;
+    this.rollResultAvailable = false;
+  }
+}
+StatValueComponent.ɵfac = function StatValueComponent_Factory(t) {
+  return new (t || StatValueComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_player_mode_provider_service__WEBPACK_IMPORTED_MODULE_0__.PlayerModeProviderService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](src_app_services_dice_roller_service__WEBPACK_IMPORTED_MODULE_1__.DiceRollerService));
+};
+StatValueComponent.ɵcmp = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({
+  type: StatValueComponent,
+  selectors: [["app-stat-value"]],
+  inputs: {
+    label: "label",
+    value: "value",
+    noOfDice: "noOfDice",
+    diceSides: "diceSides"
+  },
+  outputs: {
+    valueChange: "valueChange"
+  },
+  decls: 4,
+  vars: 3,
+  consts: [["type", "number", "class", "editable-value", 3, "ngModel", "ngModelChange", 4, "ngIf"], [4, "ngIf"], ["type", "number", 1, "editable-value", 3, "ngModel", "ngModelChange"], ["type", "text", "readonly", "true", 1, "readonly-value", 3, "ngModel"], [3, "disabled", "click"], ["class", "check-success", 4, "ngIf"], ["class", "check-failed", 4, "ngIf"], [1, "check-success"], [1, "check-failed"]],
+  template: function StatValueComponent_Template(rf, ctx) {
+    if (rf & 1) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "label");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](2, StatValueComponent_input_2_Template, 1, 1, "input", 0);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](3, StatValueComponent_span_3_Template, 7, 4, "span", 1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+    }
+    if (rf & 2) {
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.label, " ");
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx.pmodeps.editMode);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", !ctx.pmodeps.editMode);
+    }
+  },
+  dependencies: [_angular_common__WEBPACK_IMPORTED_MODULE_3__.NgIf, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.DefaultValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NumberValueAccessor, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_4__.NgModel],
+  styles: [".check-success[_ngcontent-%COMP%] {\n    color: green;\n}\n\n.check-failed[_ngcontent-%COMP%] {\n    color: red;\n}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9hcHAvY29tcG9uZW50cy9wcmltaXRpdmVzL3N0YXQtdmFsdWUvc3RhdC12YWx1ZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksWUFBWTtBQUNoQjs7QUFFQTtJQUNJLFVBQVU7QUFDZCIsInNvdXJjZXNDb250ZW50IjpbIi5jaGVjay1zdWNjZXNzIHtcbiAgICBjb2xvcjogZ3JlZW47XG59XG5cbi5jaGVjay1mYWlsZWQge1xuICAgIGNvbG9yOiByZWQ7XG59Il0sInNvdXJjZVJvb3QiOiIifQ== */"]
+});
+
+/***/ }),
+
 /***/ 78:
 /*!**********************************!*\
   !*** ./src/app/models/player.ts ***!
@@ -1372,6 +1969,41 @@ NgMaterialModule.ɵinj = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__
 
 /***/ }),
 
+/***/ 7617:
+/*!*************************************************!*\
+  !*** ./src/app/services/dice-roller.service.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DiceRollerService": () => (/* binding */ DiceRollerService)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2560);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ 8987);
+
+
+class DiceRollerService {
+  constructor(httpClient) {
+    this.httpClient = httpClient;
+  }
+  rollDice(noOfDice, diceSides) {
+    // https://rolz.org/help/api
+    const diceParam = noOfDice + 'd' + diceSides;
+    return this.httpClient.get(`https://rolz.org/api/?${diceParam}.json`);
+  }
+}
+DiceRollerService.ɵfac = function DiceRollerService_Factory(t) {
+  return new (t || DiceRollerService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpClient));
+};
+DiceRollerService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+  token: DiceRollerService,
+  factory: DiceRollerService.ɵfac,
+  providedIn: 'root'
+});
+
+/***/ }),
+
 /***/ 6297:
 /*!*********************************************************!*\
   !*** ./src/app/services/player-localstorage.service.ts ***!
@@ -1408,6 +2040,34 @@ PlayerLocalstorageService.ɵfac = function PlayerLocalstorageService_Factory(t) 
 PlayerLocalstorageService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
   token: PlayerLocalstorageService,
   factory: PlayerLocalstorageService.ɵfac,
+  providedIn: 'root'
+});
+
+/***/ }),
+
+/***/ 5400:
+/*!**********************************************************!*\
+  !*** ./src/app/services/player-mode-provider.service.ts ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PlayerModeProviderService": () => (/* binding */ PlayerModeProviderService)
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2560);
+
+class PlayerModeProviderService {
+  constructor() {
+    this.editMode = false;
+  }
+}
+PlayerModeProviderService.ɵfac = function PlayerModeProviderService_Factory(t) {
+  return new (t || PlayerModeProviderService)();
+};
+PlayerModeProviderService.ɵprov = /*@__PURE__*/_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
+  token: PlayerModeProviderService,
+  factory: PlayerModeProviderService.ɵfac,
   providedIn: 'root'
 });
 
