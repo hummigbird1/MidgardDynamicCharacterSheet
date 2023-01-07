@@ -1,67 +1,135 @@
+<div class="information-block">
+    <table>
+        <tr>
+            <td>
+                <app-text-stat-value label="Name" [(value)]="player.name" [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-text-stat-value label="Typ" [(value)]="player.type" [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="Grad" [(value)]="player.level" [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-text-stat-value label="Herkunft" [(value)]="player.origin"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-text-stat-value label="Stand" [(value)]="player.socialStanding"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="Alter" [(value)]="player.age" [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-text-stat-value label="Beruf" [(value)]="player.occupation"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-text-stat-value label="Glaube" [(value)]="player.faith"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="GG" [(value)]="player.godlyGrace" [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="visual-attributes-block">
+    <table>
+        <tr>
+            <td>
+                <app-stat-value label="Größe" [(value)]="player.appearance.height"
+                    [editMode]="editMode"></app-stat-value>
+            </td>
+            <td rowspan="3">
+                <app-text-stat-value [multiline]="true" label="Aussehen" [(value)]="player.appearance.appearance"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-stat-value label="Gewicht" [(value)]="player.appearance.weight"
+                    [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-text-stat-value label="Gestalt" [(value)]="player.appearance.figure"
+                    [editMode]="editMode"></app-text-stat-value>
+            </td>
+        </tr>
+    </table>
+</div>
 <div class="attributes-block">
     <table>
         <tr>
             <td>
-                <app-stat-value label="ST" [(value)]="player.attributes.strength" [diceSides]="100"></app-stat-value>
+                <app-stat-value label="ST" [(value)]="player.attributes.strength" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <app-stat-value label="GE" [(value)]="player.attributes.agility" [diceSides]="100"></app-stat-value>
+                <app-stat-value label="GE" [(value)]="player.attributes.agility" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <app-stat-value label="KO" [(value)]="player.attributes.constitution"
-                    [diceSides]="100"></app-stat-value>
+                <app-stat-value label="KO" [(value)]="player.attributes.constitution" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <app-stat-value label="IN" [(value)]="player.attributes.intelligence"
-                    [diceSides]="100"></app-stat-value>
+                <app-stat-value label="IN" [(value)]="player.attributes.intelligence" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <app-stat-value label="ZT" [(value)]="player.attributes.magicAffinity"
-                    [diceSides]="100"></app-stat-value>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <app-stat-value label="AU" [(value)]="player.attributes.looks" [diceSides]="100"></app-stat-value>
-            </td>
-            <td>
-                <app-stat-value label="PA" [(value)]="player.attributes.charisma" [diceSides]="100"></app-stat-value>
-            </td>
-            <td>
-                <app-stat-value label="SB" [(value)]="player.attributes.selfControl" [diceSides]="100"></app-stat-value>
-            </td>
-            <td>
-                <app-stat-value label="HGW" [(value)]="player.attributes.closeQuarterCombatAffinity"
-                    [diceSides]="100"></app-stat-value>
-            </td>
-            <td>
-                <app-stat-value label="KAW" [(value)]="player.attributes.showOfStrengthAffinitiy"
-                    [diceSides]="100"></app-stat-value>
+                <app-stat-value label="ZT" [(value)]="player.attributes.magicAffinity" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <app-stat-value label="RW" [(value)]="player.attributes.reaction" [diceSides]="100"></app-stat-value>
+                <app-stat-value label="AU" [(value)]="player.attributes.looks" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>B:
-                    <input type="number" [(ngModel)]="player.attributes.movement">
-                </label>
+                <app-stat-value label="PA" [(value)]="player.attributes.charisma" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>WLW:
-                    <input type="number" [(ngModel)]="player.attributes.revivalAffinitiy">
-                </label>
+                <app-stat-value label="SB" [(value)]="player.attributes.selfControl" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>LP-Basis:
-                    <input type="number" [(ngModel)]="player.attributes.hitPointsBase">
-                </label>
+                <app-stat-value label="HGW" [(value)]="player.attributes.closeQuarterCombatAffinity" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>GiT:
-                    <input type="number" [(ngModel)]="player.attributes.poisonResistance">
-                </label>
+                <app-stat-value label="KAW" [(value)]="player.attributes.showOfStrengthAffinitiy" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-stat-value label="RW" [(value)]="player.attributes.reaction" [diceSides]="100"
+                    [isChallengeableStat]="true" [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="B" [(value)]="player.attributes.movement" [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="WLW" [(value)]="player.attributes.revivalAffinitiy"
+                    [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="LP-Basis" [(value)]="player.attributes.hitPointsBase"
+                    [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="GiT" [(value)]="player.attributes.poisonResistance"
+                    [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
     </table>
@@ -72,48 +140,60 @@
             <td>persönlicher Bonus
             </td>
             <td>
-                <label>Ausdauer:
-                    <input type="number" [(ngModel)]="player.bonusStats.stamina" [readOnly]="!pmodeps.editMode">
-                </label>
+                <app-stat-value label="Ausdauer" [(value)]="player.bonusStats.stamina"
+                    [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>Zaubern:
-                    <input type="number" [(ngModel)]="player.bonusStats.magic">
-                </label>
+                <app-stat-value label="Zaubern" [(value)]="player.bonusStats.magic"
+                    [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <label>Angriff:
-                    <input type="number" [(ngModel)]="player.bonusStats.attack">
-                </label>
+                <app-stat-value label="Angriff" [(value)]="player.bonusStats.attack"
+                    [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>Schaden:
-                    <input type="number" [(ngModel)]="player.bonusStats.damage">
-                </label>
+                <app-stat-value label="Schaden" [(value)]="player.bonusStats.damage"
+                    [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>Abwehr:
-                    <input type="number" [(ngModel)]="player.bonusStats.defense">
-                </label>
+                <app-stat-value label="Abwehr" [(value)]="player.bonusStats.defense"
+                    [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <label>psy.ZR:
-                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.psychologic">
-                </label>
+                <app-stat-value label="psy.ZR" [(value)]="player.bonusStats.magicResistance.psychologic"
+                    [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>phs.ZR:
-                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.physical">
-                </label>
+                <app-stat-value label="phs.ZR" [(value)]="player.bonusStats.magicResistance.physical"
+                    [editMode]="editMode"></app-stat-value>
             </td>
             <td>
-                <label>phk.ZR:
-                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.environmental">
-                </label>
+                <app-stat-value label="phk.ZR" [(value)]="player.bonusStats.magicResistance.environmental"
+                    [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="health-block">
+    <table>
+        <tr>
+            <td>
+                <app-stat-value label="LP" [(value)]="player.stats.base.hitPoints" [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="LP (aktuell)" [(value)]="player.stats.current.hitPoints" [editMode]="editMode"></app-stat-value>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <app-stat-value label="AP" [(value)]="player.stats.base.staminaPoints" [editMode]="editMode"></app-stat-value>
+            </td>
+            <td>
+                <app-stat-value label="AP (aktuell)" [(value)]="player.stats.current.staminaPoints" [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
     </table>
@@ -122,48 +202,39 @@
     <table>
         <tr>
             <td rowspan="3">
-                <label>
-                    Rüstung:
-                    <textarea [(ngModel)]="player.defenseStats.armorDescription"></textarea>
-                </label>
+                <app-text-stat-value [multiline]="true" label="Rüstung" [(value)]="player.defenseStats.armorDescription"
+                    [editMode]="editMode"></app-text-stat-value>
             </td>
             <td>
-                <label>RK:
-                    <input [(ngModel)]="player.defenseStats.armorClass">
-                </label>
+                <app-text-stat-value [multiline]="false" label="RK" [(value)]="player.defenseStats.armorClass"
+                    [editMode]="editMode"></app-text-stat-value>
             </td>
             <td>
-                <label>psy.ZR:
-                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.psychologic">
-                </label>
-
+                <app-stat-value label="psy.ZR" [(value)]="player.defenseStats.magicResistance.psychologic"
+                    [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <label>LPV:
-                    <input type="number" [(ngModel)]="player.defenseStats.hitPointLossValue">
-                </label>
+                <app-stat-value label="LPV" [(value)]="player.defenseStats.hitPointLossValue"
+                    [editMode]="editMode"></app-stat-value>
             </td>
 
             <td>
-                <label>phs.ZR:
-                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.physical">
-                </label>
+                <app-stat-value label="phs.ZR" [(value)]="player.defenseStats.magicResistance.physical"
+                    [editMode]="editMode"></app-stat-value>
             </td>
 
         </tr>
         <tr>
             <td>
-                <label>Abwehr:
-                    <input type="number" [(ngModel)]="player.defenseStats.defense">
-                </label>
+                <app-stat-value label="Abwehr" [(value)]="player.defenseStats.defense"
+                    [editMode]="editMode"></app-stat-value>
             </td>
 
             <td>
-                <label>phk.ZR:
-                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.environmental">
-                </label>
+                <app-stat-value label="phk.ZR" [(value)]="player.defenseStats.magicResistance.environmental"
+                    [editMode]="editMode"></app-stat-value>
             </td>
         </tr>
     </table>
@@ -173,26 +244,26 @@
     <table>
         <tr>
             <td colspan="3">
-                <label>GFP:
-                    <input type="number" [(ngModel)]="player.experience.total">
-                </label>
+                <app-numeric-value-handler label="GFP" [displayButtons]="false"
+                    [(currentValue)]="player.experience.total" [minValue]="0"
+                    [maxValue]="99999999999999"></app-numeric-value-handler>
             </td>
         </tr>
         <tr>
             <td>
-                <label>AEP:
-                    <input type="number" [(ngModel)]="player.experience.common">
-                </label>
+                <app-numeric-value-handler label="AEP" [displayButtons]="false"
+                    [(currentValue)]="player.experience.common" [minValue]="0"
+                    [maxValue]="99999999999999"></app-numeric-value-handler>
             </td>
             <td>
-                <label>KEP:
-                    <input type="number" [(ngModel)]="player.experience.battle">
-                </label>
+                <app-numeric-value-handler label="KEP" [displayButtons]="false"
+                    [(currentValue)]="player.experience.battle" [minValue]="0"
+                    [maxValue]="99999999999999"></app-numeric-value-handler>
             </td>
             <td>
-                <label>ZEP:
-                    <input type="number" [(ngModel)]="player.experience.magic">
-                </label>
+                <app-numeric-value-handler label="ZEP" [displayButtons]="false"
+                    [(currentValue)]="player.experience.magic" [minValue]="0"
+                    [maxValue]="99999999999999"></app-numeric-value-handler>
             </td>
         </tr>
         <tr>
