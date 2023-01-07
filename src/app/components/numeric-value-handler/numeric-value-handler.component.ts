@@ -15,6 +15,7 @@ export class NumericValueHandlerComponent {
   @Input() maxValue: number | undefined;
   @Input() baseValue: number | undefined;
   @Input() showReset: boolean = true;
+  @Input() displayButtons: boolean = true;
   @Output() currentValueChange = new EventEmitter<number>();
   currentTextChange = new EventEmitter<string>();
   projectingValue: boolean = false;

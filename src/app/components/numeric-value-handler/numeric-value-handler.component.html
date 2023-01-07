@@ -1,12 +1,12 @@
 <div class="flex-container flex-item-gap">
     <label class="flex-container bold growable-flex-item flex-item-gap">{{ label }}
         <input type="text" class="flex-container growable-flex-item" [(ngModel)]="currentText"
-            (ngModelChange)="onModelChange($event)" [max]="maxValue" [min]="minValue" required
+            (ngModelChange)="onModelChange($event)" required
             [class.invalid-input]="!isValid" (keydown)="onKeyDown($event)" />
             <span *ngIf="projectingValue"> = {{ projectedValue }}</span>
     </label>
 
-    <span class="flex-container">
+    <span *ngIf="displayButtons" class="flex-container">
         <button (click)="countDown()" [disabled]="!canCountDown || !isValid">-</button>
         <button (click)="countUp()" [disabled]="!canCountUp || !isValid">+</button>
         <button *ngIf='showReset' (click)="resetValue()" [disabled]="!canReset">Reset</button>
