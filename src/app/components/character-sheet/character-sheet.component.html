@@ -1,12 +1,240 @@
-<label>
-    Name
-    <input [(ngModel)]="player.name">
-</label>
-<br />
-<app-numeric-value-handler label="HP" [(currentValue)]="player.stats.current.hitPoints"
-    [baseValue]="player.stats.base.hitPoints" [minValue]="0" [maxValue]="player.stats.base.hitPoints">
-</app-numeric-value-handler>
-<br />
-<app-numeric-value-handler label="AP" [(currentValue)]="player.stats.current.staminaPoints"
-    [baseValue]="player.stats.base.staminaPoints" [minValue]="0" [maxValue]="player.stats.base.staminaPoints">
-</app-numeric-value-handler>
+<div class="attributes-block">
+    <table>
+        <tr>
+            <td>
+                <label>ST:
+                    <input *ngIf="pmodeps.editMode" type="number" [(ngModel)]="player.attributes.strength" class="editable-value">
+                    <span *ngIf="!pmodeps.editMode">
+                        <input  type="text" [ngModel]="player.attributes.strength" readonly="true" class="readonly-value">
+                        <button>
+                            Roll
+                        </button>
+
+                    </span>
+                </label>
+            </td>
+            <td>
+                <label>GE:
+                    <input type="number" [(ngModel)]="player.attributes.agility">
+                </label>
+            </td>
+            <td>
+                <label>KO:
+                    <input type="number" [(ngModel)]="player.attributes.constitution">
+                </label>
+            </td>
+            <td>
+                <label>IN:
+                    <input type="number" [(ngModel)]="player.attributes.intelligence">
+                </label>
+            </td>
+            <td>
+                <label>ZT:
+                    <input type="number" [(ngModel)]="player.attributes.magicAffinity">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>AU:
+                    <input type="number" [(ngModel)]="player.attributes.looks">
+                </label>
+            </td>
+            <td>
+                <label>PA:
+                    <input type="number" [(ngModel)]="player.attributes.charisma">
+                </label>
+            </td>
+            <td>
+                <label>SB:
+                    <input type="number" [(ngModel)]="player.attributes.selfControl">
+                </label>
+            </td>
+            <td>
+                <label>HGW:
+                    <input type="number" [(ngModel)]="player.attributes.closeQuarterCombatAffinity">
+                </label>
+            </td>
+            <td>
+                <label>KAW:
+                    <input type="number" [(ngModel)]="player.attributes.showOfStrengthAffinitiy">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>RW:
+                    <input type="number" [(ngModel)]="player.attributes.reaction">
+                </label>
+            </td>
+            <td>
+                <label>B:
+                    <input type="number" [(ngModel)]="player.attributes.movement">
+                </label>
+            </td>
+            <td>
+                <label>WLW:
+                    <input type="number" [(ngModel)]="player.attributes.revivalAffinitiy">
+                </label>
+            </td>
+            <td>
+                <label>LP-Basis:
+                    <input type="number" [(ngModel)]="player.attributes.hitPointsBase">
+                </label>
+            </td>
+            <td>
+                <label>GiT:
+                    <input type="number" [(ngModel)]="player.attributes.poisonResistance">
+                </label>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="bonus-block">
+    <table>
+        <tr>
+            <td>persönlicher Bonus
+            </td>
+            <td>
+                <label>Ausdauer:
+                    <input type="number" [(ngModel)]="player.bonusStats.stamina" [readOnly]="!pmodeps.editMode">
+                </label>
+            </td>
+            <td>
+                <label>Zaubern:
+                    <input type="number" [(ngModel)]="player.bonusStats.magic">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Angriff:
+                    <input type="number" [(ngModel)]="player.bonusStats.attack">
+                </label>
+            </td>
+            <td>
+                <label>Schaden:
+                    <input type="number" [(ngModel)]="player.bonusStats.damage">
+                </label>
+            </td>
+            <td>
+                <label>Abwehr:
+                    <input type="number" [(ngModel)]="player.bonusStats.defense">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>psy.ZR:
+                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.psychologic">
+                </label>
+            </td>
+            <td>
+                <label>phs.ZR:
+                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.physical">
+                </label>
+            </td>
+            <td>
+                <label>phk.ZR:
+                    <input type="number" [(ngModel)]="player.bonusStats.magicResistance.environmental">
+                </label>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="defense-block">
+    <table>
+        <tr>
+            <td rowspan="3">
+                <label>
+                    Rüstung:
+                    <textarea [(ngModel)]="player.defenseStats.armorDescription"></textarea>
+                </label>
+            </td>
+            <td>
+                <label>RK:
+                    <input [(ngModel)]="player.defenseStats.armorClass">
+                </label>
+            </td>
+            <td>
+                <label>psy.ZR:
+                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.psychologic">
+                </label>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>LPV:
+                    <input type="number" [(ngModel)]="player.defenseStats.hitPointLossValue">
+                </label>
+            </td>
+
+            <td>
+                <label>phs.ZR:
+                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.physical">
+                </label>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label>Abwehr:
+                    <input type="number" [(ngModel)]="player.defenseStats.defense">
+                </label>
+            </td>
+
+            <td>
+                <label>phk.ZR:
+                    <input type="number" [(ngModel)]="player.defenseStats.magicResistance.environmental">
+                </label>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="experience-block">
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <label>GFP:
+                    <input type="number" [(ngModel)]="player.experience.total">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>AEP:
+                    <input type="number" [(ngModel)]="player.experience.common">
+                </label>
+            </td>
+            <td>
+                <label>KEP:
+                    <input type="number" [(ngModel)]="player.experience.battle">
+                </label>
+            </td>
+            <td>
+                <label>ZEP:
+                    <input type="number" [(ngModel)]="player.experience.magic">
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>GS:
+                    <input type="number" [(ngModel)]="player.currencies.coins.gold">
+                </label>
+            </td>
+            <td>
+                <label>SS:
+                    <input type="number" [(ngModel)]="player.currencies.coins.silver">
+                </label>
+            </td>
+            <td>
+                <label>KS:
+                    <input type="number" [(ngModel)]="player.currencies.coins.copper">
+                </label>
+            </td>
+        </tr>
+    </table>
+</div>
