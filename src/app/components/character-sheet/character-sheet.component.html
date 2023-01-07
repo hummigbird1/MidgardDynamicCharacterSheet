@@ -2,70 +2,46 @@
     <table>
         <tr>
             <td>
-                <label>ST:
-                    <input *ngIf="pmodeps.editMode" type="number" [(ngModel)]="player.attributes.strength" class="editable-value">
-                    <span *ngIf="!pmodeps.editMode">
-                        <input  type="text" [ngModel]="player.attributes.strength" readonly="true" class="readonly-value">
-                        <button>
-                            Roll
-                        </button>
-
-                    </span>
-                </label>
+                <app-stat-value label="ST" [(value)]="player.attributes.strength" [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>GE:
-                    <input type="number" [(ngModel)]="player.attributes.agility">
-                </label>
+                <app-stat-value label="GE" [(value)]="player.attributes.agility" [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>KO:
-                    <input type="number" [(ngModel)]="player.attributes.constitution">
-                </label>
+                <app-stat-value label="KO" [(value)]="player.attributes.constitution"
+                    [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>IN:
-                    <input type="number" [(ngModel)]="player.attributes.intelligence">
-                </label>
+                <app-stat-value label="IN" [(value)]="player.attributes.intelligence"
+                    [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>ZT:
-                    <input type="number" [(ngModel)]="player.attributes.magicAffinity">
-                </label>
+                <app-stat-value label="ZT" [(value)]="player.attributes.magicAffinity"
+                    [diceSides]="100"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <label>AU:
-                    <input type="number" [(ngModel)]="player.attributes.looks">
-                </label>
+                <app-stat-value label="AU" [(value)]="player.attributes.looks" [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>PA:
-                    <input type="number" [(ngModel)]="player.attributes.charisma">
-                </label>
+                <app-stat-value label="PA" [(value)]="player.attributes.charisma" [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>SB:
-                    <input type="number" [(ngModel)]="player.attributes.selfControl">
-                </label>
+                <app-stat-value label="SB" [(value)]="player.attributes.selfControl" [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>HGW:
-                    <input type="number" [(ngModel)]="player.attributes.closeQuarterCombatAffinity">
-                </label>
+                <app-stat-value label="HGW" [(value)]="player.attributes.closeQuarterCombatAffinity"
+                    [diceSides]="100"></app-stat-value>
             </td>
             <td>
-                <label>KAW:
-                    <input type="number" [(ngModel)]="player.attributes.showOfStrengthAffinitiy">
-                </label>
+                <app-stat-value label="KAW" [(value)]="player.attributes.showOfStrengthAffinitiy"
+                    [diceSides]="100"></app-stat-value>
             </td>
         </tr>
         <tr>
             <td>
-                <label>RW:
-                    <input type="number" [(ngModel)]="player.attributes.reaction">
-                </label>
+                <app-stat-value label="RW" [(value)]="player.attributes.reaction" [diceSides]="100"></app-stat-value>
             </td>
             <td>
                 <label>B:
@@ -221,19 +197,19 @@
         </tr>
         <tr>
             <td>
-                <label>GS:
-                    <input type="number" [(ngModel)]="player.currencies.coins.gold">
-                </label>
+                <app-numeric-value-handler label="GS:" [minValue]="0" [maxValue]="99999999999" [showReset]="false"
+                    [(currentValue)]="player.currencies.coins.gold">
+                </app-numeric-value-handler>
             </td>
             <td>
-                <label>SS:
-                    <input type="number" [(ngModel)]="player.currencies.coins.silver">
-                </label>
+                <app-numeric-value-handler label="SS:" [minValue]="0" [maxValue]="99999999999" [showReset]="false"
+                    [(currentValue)]="player.currencies.coins.silver">
+                </app-numeric-value-handler>
             </td>
             <td>
-                <label>KS:
-                    <input type="number" [(ngModel)]="player.currencies.coins.copper">
-                </label>
+                <app-numeric-value-handler label="KS:" [minValue]="0" [maxValue]="99999999999" [showReset]="false"
+                    [(currentValue)]="player.currencies.coins.copper">
+                </app-numeric-value-handler>
             </td>
         </tr>
     </table>
