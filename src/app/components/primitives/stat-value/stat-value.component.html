@@ -1,0 +1,18 @@
+<label> {{ label }}
+    <input *ngIf="pmodeps.editMode" type="number" [(ngModel)]="value" class="editable-value">
+    <span *ngIf="!pmodeps.editMode">
+        <input  type="text" [ngModel]="value" readonly="true" class="readonly-value">
+        <button [disabled]="!canRoll" (click)="onClick()">
+            Prüfwurf
+        </button>
+        <br>
+        <span *ngIf="!rollResultAvailable && !canRoll">
+            Warte auf {{ noOfDice }}d{{ diceSides}}
+        </span>
+        <span *ngIf="rollResultAvailable">
+            <label *ngIf="valueCheckSuccessful" class="check-success">{{ rollResult }} Prüfwurf geschafft :)</label>
+            <label *ngIf="!valueCheckSuccessful" class="check-failed">{{ rollResult }} Prüfwurf fehlgeschlagen :(</label>
+        </span>
+
+    </span>
+</label>

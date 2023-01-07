@@ -13,6 +13,8 @@ import { PlayerModelProviderService } from './services/player-model-provider.ser
 import { CharacterSheetComponent } from './components/character-sheet/character-sheet.component';
 import { PlayerLocalstorageComponent } from './components/player-localstorage/player-localstorage.component';
 import { BasicCharacterStatsComponent } from './components/basic-character-stats/basic-character-stats.component';
+import { HttpClientModule } from '@angular/common/http';
+import { StatValueComponent } from './components/primitives/stat-value/stat-value.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { BasicCharacterStatsComponent } from './components/basic-character-stats
     CharacterSheetComponent,
     PlayerLocalstorageComponent,
     BasicCharacterStatsComponent,
+    StatValueComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { BasicCharacterStatsComponent } from './components/basic-character-stats
     FormsModule,
     BrowserAnimationsModule,
     NgMaterialModule,
+    HttpClientModule
   ],
   providers: [ PlayerModelProviderService ],
   bootstrap: [AppComponent]
