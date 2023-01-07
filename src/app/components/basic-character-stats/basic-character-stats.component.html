@@ -1,7 +1,4 @@
-<label>
-    Name
-    <input [(ngModel)]="player.name">
-</label>
+Character Name {{ player.name }}
 <br />
 <app-numeric-value-handler label="HP" [(currentValue)]="player.stats.current.hitPoints"
     [baseValue]="player.stats.base.hitPoints" [minValue]="0" [maxValue]="player.stats.base.hitPoints">
