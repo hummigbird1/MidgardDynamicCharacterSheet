@@ -5,3 +5,9 @@
 .check-failed {
     color: red;
 }
+
+.readonly-value {
+    width: 50px;
+    border-style: none;
+    background-color: transparent;
+}

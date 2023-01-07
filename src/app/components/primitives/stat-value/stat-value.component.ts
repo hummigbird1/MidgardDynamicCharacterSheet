@@ -16,16 +16,30 @@ export class StatValueComponent {
   @Input() noOfDice: number = 1;
   @Input() diceSides: number = 100;
 
+  @Input() isChallengeableStat: boolean = false;
+  @Input() editMode: boolean = false;
+
   public canRoll = true;
   public rollResultAvailable = false;
   public valueCheckSuccessful = false;
   public rollResult = 0;
-  constructor(public pmodeps: PlayerModeProviderService, 
-    private diceRollerService:DiceRollerService) { }
+  private timeout: NodeJS.Timeout | undefined;
+  constructor(private diceRollerService:DiceRollerService) { }
 
   onClick() {
     this.canRoll = false;
     this.diceRollerService.rollDice(this.noOfDice, this.diceSides).subscribe(x => this.evaluateDiceRollResult(this.value, x.result));
+  }
+
+  onModelChange(event:Event) {
+    this.valueChange.emit(this.value);
+  }
+
+  onResetDiceRollResult() {
+    if(this.timeout !== undefined){
+      clearTimeout(this.timeout);
+    }
+    this.resetRollability();
   }
 
   private evaluateDiceRollResult(val: number, diceRollResult: number) {
@@ -36,9 +50,9 @@ export class StatValueComponent {
       this.valueCheckSuccessful = false;
     }
     this.rollResultAvailable = true;
-    setTimeout(() => { 
+    this.timeout = setTimeout(() => { 
       this.resetRollability();
-    }, 10000);
+    }, 30000);
   }
 
   private resetRollability()  {
